@@ -1,7 +1,7 @@
 const APIManager = Object.create(null, {
     saveUserEntry: {
         value: (entry) => {
-            return fetch("http://localhost:8088/entries", {
+            return fetch("http://localhost:8088/users", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -13,12 +13,12 @@ const APIManager = Object.create(null, {
     },
     getAllEntries: {
         value: () => {
-            return fetch("http://localhost:8088/entries?_order=desc&_sort=date").then(r => r.json())
+            return fetch("http://localhost:8088/users").then(r => r.json())
         }
     },
     deleteEntry: {
         value: (id) => {
-            return fetch(`http://localhost:8088/entries/${id}`, {
+            return fetch(`http://localhost:8088/users/${id}`, {
                 method: "DELETE"
             })
                 .then(r => r.json())
