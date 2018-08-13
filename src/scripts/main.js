@@ -1,5 +1,10 @@
-console.log("Welcome to Browserify")
-
 const LoginFormManager = require("./login")
+const $ = require("jquery")
 
-document.querySelector("#loginForm").innerHTML = LoginFormManager.renderLoginForm()
+$("#loginForm").html(LoginFormManager.renderLoginForm())
+
+$("#loginForm").on("click", event => {
+    if (event.target.classList.contains("LoginButton"))
+        (console.log("IT WORKS"))
+})
+
