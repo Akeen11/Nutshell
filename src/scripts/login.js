@@ -1,4 +1,5 @@
 const $ = require("jquery")
+// module for the login form. Using jquery!
 
 const LoginFormManager = Object.create(null, {
     clearForm: {
@@ -9,7 +10,7 @@ const LoginFormManager = Object.create(null, {
             $("#createPassWordTitle").val("")
         }
     },
-    // creating the form for login
+    // creating the form for login with some basic HTML
     renderLoginForm: {
         value: () => {
             return `
@@ -41,5 +42,6 @@ const LoginFormManager = Object.create(null, {
 
 })
 
+// exporting so other module may use it.
 module.exports = LoginFormManager
 
