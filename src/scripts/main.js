@@ -13,7 +13,7 @@ $("#loginForm").on("click", "#LoginButton", event => {
 
         if (user) {
             sessionStorage.setItem("activeUser", JSON.stringify(user))
-            //hide
+            $("#form_sub_container2").hide();
 
         }else{
             alert("You need to register")
@@ -24,9 +24,6 @@ $("#loginForm").on("click", "#LoginButton", event => {
 })
 
 $("#create").on("click", event => {
-    // Get form field values
-    // Create object from them
-    // Add timestamp
     console.log("it works")
     const newUser = {
         name: $("#nameTitle").val(),
@@ -37,11 +34,6 @@ $("#create").on("click", event => {
 
     DataManager.saveUserEntry(newUser).then(() => {
         LoginFormManager.clearForm()
-        // $("#usernameTitle").val("")
-        // $("#passwordTitle").val("")
-        // $("#nameTitle").val("")
-        // $("#emailTitle").val("")
-        // $("#createPassWordTitle").val("")
     })
         .then(() => {
             alert("Thank you for creating an account! Go log in!")
