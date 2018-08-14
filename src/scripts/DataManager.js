@@ -23,9 +23,43 @@ const APIManager = Object.create(null, {
             })
                 .then(r => r.json())
         }
-    }
-
-
+    },
+    getMassage: {
+        value: (Id) => {
+            return fetch("http://localhost:8088/Message")
+                .then(res => res.json())
+        }
+    },
+    postMessage(msg, user) {
+        return fetch ("http://localhost:8088/Messages",{
+             method: "POST",
+             data: {
+                 "userId": user,
+                 "message": msg
+             }
+         })
+         .then(res=>res.json())
+     },
+     putMessage(user, msg, id) {
+        return fetch (`http://localhost:8088/Messages/${id}`,{
+             method: "PUT",
+             data: {
+                 "userId": user,
+                 "Message": msg
+             }
+         })
+         .then(res=>res.json())
+     },
+     deleteMessage(user, msg, id) {
+        return fetch (`http://localhost:8088/Messages/${id}`,{
+             method: "DELETE",
+             data: {
+                 "userId": user,
+                 "Message": msg
+             }
+         })
+         .then(res=>res.json())
+     }
 
 
 })
