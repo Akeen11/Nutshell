@@ -1,6 +1,6 @@
 console.log("Welcome to Browserify")
 //const $=require("jquery")
-
+const DataManager=require("./DataManager")
 const LoginFormManager = require("./login")
 const $ = require("jquery")
 
