@@ -15,6 +15,7 @@ module.exports = function(grunt) {
                 browserifyOptions: {
                     debug: true,
                     paths: ["../scripts","./node_modules"],
+                    // paths: ["../scripts", "./node_modules"],
                 }
             },
             dist: {

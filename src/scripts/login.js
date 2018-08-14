@@ -9,7 +9,7 @@ const LoginFormManager = Object.create(null, {
             $("#createPassWordTitle").val("")
         }
     },
-    // creating the form
+    // creating the form for login
     renderLoginForm: {
         value: () => {
             return `
@@ -23,7 +23,7 @@ const LoginFormManager = Object.create(null, {
                     <input required type="text" id="passwordTitle" placeholder="password">
                 </article>
                 
-                <button id="LoginButton">Login</button>
+                <button id="LoginButton" class="LoginButton">Login</button>
                 <h2>Create Account</h2>
                 <article class="userField">
                     <label for="createUser">Username:</label>
