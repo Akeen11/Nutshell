@@ -1,6 +1,6 @@
 const $ = require("jquery")
 //Coded by Jenn
-const databaseHandler = require("./DataBaseuser")
+const databaseHandler = require("./DataMAnager")
 
 const friendList = Object.create({}, { // creates element to hold all of the friends and input to find friends and add them
     "createFriendsTemplate" : {
