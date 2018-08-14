@@ -1,5 +1,6 @@
 const DataManager = require("./DataManager")
 const LoginFormManager = require("./login")
+const ArticleForm = require("./ArticleForm")
 const $ = require("jquery")
 
 $("#loginForm").html(LoginFormManager.renderLoginForm())
@@ -33,3 +34,5 @@ $("#create").on("click", event => {
     $("#emailTitle").val("")
     $("#createPassWordTitle").val("")
 })
+
+$("#articleForm").html(ArticleForm.renderArticleForm())
