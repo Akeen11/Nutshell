@@ -26,13 +26,17 @@ const LoginFormManager = Object.create(null, {
                 
                 <button id="LoginButton" class="LoginButton">Login</button>
                 <h2>Create Account</h2>
+                <article class="nameField">
+                    <label for="createName">Name:</label>
+                    <input required type="text" id="nameTitle" placeholder="name">
+                </article>
                 <article class="userField">
                     <label for="createUser">Username:</label>
                     <input required type="text" id="emailTitle" placeholder="email address">
                 </article>
                 <article class="passwordField">
                     <label for="password">Password:</label>
-                    <input required type="text" id="createPassWordTitle" placeholder="password">
+                    <input type="password" id="createPassWordTitle" placeholder="password">
                 </article>
                 
                 <button id="create">Create Account</button>
