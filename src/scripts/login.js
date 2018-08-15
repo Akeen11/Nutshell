@@ -16,6 +16,7 @@ const LoginFormManager = Object.create(null, {
     renderLoginForm: {
         value: () => {
             return `
+            <h1>Welcome!</h1>
             <h2>Sign In</h2>
             <article class="userField">
             <label for="username">Username:</label>

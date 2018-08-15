@@ -13,7 +13,11 @@ $("#loginForm").on("click", "#LoginButton", event => {
 
         if (user) {
             sessionStorage.setItem("activeUser", JSON.stringify(user))
-            $("#form_sub_container2").hide();
+            LoginFormManager.clearForm()
+            // $("#loginForm").hide()
+            // WORKING
+            // WORKING
+
 
         }else{
             alert("You need to register")
