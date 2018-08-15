@@ -56,7 +56,7 @@ $("#create").on("click", event => {
 $("#messages").on("click","#message-btn", event => {
     let user = JSON.parse(sessionStorage.getItem("activeUser"))
     const newMessage = {
-    name:$("#message-input").val(),
+    Message:$("#message-input").val(),
     userId: user.id,
     userName: user.name
     }
