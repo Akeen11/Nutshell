@@ -1,6 +1,7 @@
 const DataManager = require("./DataManager")
 const LoginFormManager = require("./login")
 const ArticleForm = require("./ArticleForm")
+const articleEntry = require("./ArticleEntry")
 const $ = require("jquery")
 
 $("#loginForm").html(LoginFormManager.renderLoginForm())
@@ -15,11 +16,12 @@ $("#loginForm").on("click", "#LoginButton", event => {
             sessionStorage.setItem("activeUser", JSON.stringify(user))
             LoginFormManager.clearForm()
             //WORKING
-            $("#loginForm").fadeOut(1000)
-            //WORKING
+            $("#loginForm").hide()
+            //WORKING         
+            $("#articleForm").html(ArticleForm.renderArticleForm())
+            listArticles()
 
-
-        }else{
+        } else {
             LoginFormManager.clearForm()
             alert("You need to register")
         }
@@ -43,4 +45,39 @@ $("#create").on("click", event => {
         })
 })
 
-$("#articleForm").html(ArticleForm.renderArticleForm())
+// Article JUNK below!!!
+const listArticles = () => {
+    DataManager.getAllArticles()
+        .then(allEntries => {
+            console.log(allEntries)
+            articleEntry(allEntries)
+        })
+}
+
+
+
+// Handle delete button clicks
+$(".articleEntry").on("click", evt => {
+    if (evt.target.classList.contains("entry__delete")) {
+        const id = parseInt(evt.target.id.split("--")[1])
+        DataManager.deleteArticle(id).then(listEntries)
+    }
+})
+
+
+// Add an event listener for the save button
+$("#saveArticleButton").on("click", () => {
+    const newArticle = {
+        title: $("#articleTitle").val(""),
+        content: $("#articleContent").val(""),
+        date: Date.now()
+    }
+
+    // POST to API
+    DataManager.makeArticle(newArticle)
+        .then(() => {
+            // Clear the form fields
+            ArticleForm.clearForm()
+            listEntries()
+        })
+})
