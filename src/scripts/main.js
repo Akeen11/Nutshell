@@ -12,18 +12,17 @@ $("#loginForm").on("click", "#LoginButton", event => {
 
         if (user) {
             sessionStorage.setItem("activeUser", JSON.stringify(user))
-            //hide
+            LoginFormManager.clearForm()
             //WORKING
-            // $("#loginForm").hide()
+            $("#loginForm").fadeOut(1000)
             //WORKING
 
 
         }else{
-            alert("You need to register")
             LoginFormManager.clearForm()
+            alert("You need to register")
         }
     })
-    // (console.log("IT WORKS"))
 })
 
 $("#create").on("click", event => {
@@ -40,11 +39,6 @@ $("#create").on("click", event => {
 
     DataManager.saveUserEntry(newUser).then(() => {
         LoginFormManager.clearForm()
-        // $("#usernameTitle").val("")
-        // $("#passwordTitle").val("")
-        // $("#nameTitle").val("")
-        // $("#emailTitle").val("")
-        // $("#createPassWordTitle").val("")
     })
         .then(() => {
             alert("Thank you for creating an account! Go log in!")
