@@ -14,17 +14,16 @@ $("#loginForm").on("click", "#LoginButton", event => {
         if (user) {
             sessionStorage.setItem("activeUser", JSON.stringify(user))
             LoginFormManager.clearForm()
-            // $("#loginForm").hide()
-            // WORKING
-            // WORKING
+            //WORKING
+            $("#loginForm").fadeOut(1000)
+            //WORKING
 
 
         }else{
-            alert("You need to register")
             LoginFormManager.clearForm()
+            alert("You need to register")
         }
     })
-    // (console.log("IT WORKS"))
 })
 
 $("#create").on("click", event => {
