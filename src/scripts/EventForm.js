@@ -11,18 +11,19 @@ const FormManager = Object.create(null, {
     renderEventForm: {
         value: () => {
             return `
-            <div class="border">
+            <h2>Events</h2>
                 <fieldset>
+                <legend>Events</legend>
                     <label for="eventTitle">Title:</label>
                     <input required type="text" id="eventTitle">
                 </fieldset>
                 <fieldset>
-                    <label for="eventContent">Dope Events:</label>
-                    <textarea id="eventContent"></textarea>
+                    <label for="eventContent">Location:</label>
+                    <input required type="text" id="eventContent">
                 </fieldset>
                 <fieldset>
                     <label for="eventDate">Event Date:</label>
-                    <input required id="eventDate">
+                    <input required type="date" id="eventDate">
                 </fieldset>
                 <button id="saveEventButton">Save Event</button>
             </div>
