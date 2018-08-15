@@ -8,15 +8,6 @@ const articleEntry = (article) => {
             <div class="contentField">
                 ${article.content}
             </div>
-                <time class="entry__timestamp">${new Date(article.date).toLocaleDateString("en-US", {
-                    weekday: "long",
-                    year: "numeric",
-                    hour: "numeric",
-                    minute: "numeric",
-                    month: "long",
-                    day: "numeric"
-                })}</time>
-            </footer>
             <button class="article__delete" id="delete--${article.id}">Delete Article Entry</button>
         </div>
     `

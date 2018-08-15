@@ -47,8 +47,8 @@ const APIManager = Object.create(null, {
     },
     // deleting an article. Targetting articleId
     deleteArticle: {
-        value: (articleId) => {
-            return fetch (`http://localhost:8088/articles/${articleId}`, {
+        value: (id) => {
+            return fetch (`http://localhost:8088/articles/${id}`, {
                 method: "DELETE"
             })
             .then(response => response.json())

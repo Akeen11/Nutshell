@@ -29,13 +29,11 @@ $("#loginForm").on("click", "#LoginButton", event => {
 })
 
 $("#create").on("click", event => {
-    console.log("it works")
     const newUser = {
         name: $("#nameTitle").val(),
         email: $("#emailTitle").val(),
         password: $("#createPassWordTitle").val(),
     }
-
 
     DataManager.saveUserEntry(newUser).then(() => {
         LoginFormManager.clearForm()
@@ -44,40 +42,33 @@ $("#create").on("click", event => {
             alert("Thank you for creating an account! Go log in!")
         })
 })
+// Event listener for saving the article into the database
+$("#articleForm").on("click", "#saveArticle", () => {
+    console.log("please work")
+    const newArticle = {
+        title: $("#articleTitle").val(),
+        content: $("#articleContent").val(),
+        date: Date.now()
+    }
 
-// Article JUNK below!!!
+    // Post entries into the to API
+    DataManager.saveArticleEntry(newArticle).then(() => {
+        ArticleForm.clearForm()
+        listArticles()
+    })
+})
+
 const listArticles = () => {
     DataManager.getAllArticles()
         .then(allEntries => {
-            console.log(allEntries)
             articleEntry(allEntries)
         })
 }
 
-
-
-// Handle delete button clicks
-$(".articleEntry").on("click", evt => {
-    if (evt.target.classList.contains("entry__delete")) {
-        const id = parseInt(evt.target.id.split("--")[1])
-        DataManager.deleteArticle(id).then(listEntries)
-    }
-})
-
-
-// Add an event listener for the save button
-$("#saveArticleButton").on("click", () => {
-    const newArticle = {
-        title: $("#articleTitle").val(""),
-        content: $("#articleContent").val(""),
-        date: Date.now()
-    }
-
-    // POST to API
-    DataManager.makeArticle(newArticle)
-        .then(() => {
-            // Clear the form fields
-            ArticleForm.clearForm()
-            listEntries()
-        })
-})
+// // Handle delete button clicks
+// $(".articleEntry").on("click", evt => {
+//     if (evt.target.classList.contains("entry__delete")) {
+//         const id = parseInt(evt.target.id.split("--")[1])
+//         DataManager.deleteArticle(id).then(listEntries)
+//     }
+// })

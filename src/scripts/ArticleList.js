@@ -4,14 +4,14 @@ const $ = require("jquery")
 const articleComponent = require("./ArticleEntry")
 
 // targetting "#articleEntry" in index.html using jQuery.
-const listArticle = $("#articleEntry")
+const articleEntry = $("#articleEntry")
 
 // creating a function to populate article entries on the page.
 const articleEntryList = (entries) => {
-    listArticle.innerHTML = ""
+    articleEntry.innerHTML = ""
     // using .map to provide 
-    entries.map(articleEntry => {
-        listArticle.innerHTML += articleComponent(articleEntry)
+    entries.map(entry => {
+        articleEntry.innerHTML += articleComponent(entry)
     })
 }
 

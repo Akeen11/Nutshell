@@ -18,14 +18,22 @@ const ArticleForm = Object.create(null, {
                     <p></p>
                     <input required type="text" id="articleTitle" placeholder="Article Title">
                 </section>
+                    <p></p>
+                <section>
+                    <label for="eventDate">Article Date:</label>
+                    <p></p>
+                    <input required type="date" id="eventDate">
+                 </section>
                 <section class="contentField">
                 <p><p/>
                     <label for="articleContent">Article Content:</label>
                     <p></p>
-                    <textarea id="articleContent" placeholder="Article Content Goes Here!" rows="5">
+                    <textarea id="articleContent" 
+                    placeholder="Article Content Goes Here!" 
+                    rows="5">
                     </textarea>
                 </section>
-                <button id="saveArticleButton">Post Article</button>
+                <button id="saveArticle">Post Article</button>
             `
         }
     }
