@@ -47,14 +47,6 @@ const LoginFormManager = Object.create(null, {
         }
     },
 
-    // setItem: {
-    //     value: () => {
-    //         DataManager.getAllUsers().then(() => {
-    //             sessionStorage.setItem("activeUser", users[0].name)
-    //         })
-    //     }
-    // }
-
 
 
 })
