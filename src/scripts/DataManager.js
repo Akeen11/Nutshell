@@ -23,7 +23,52 @@ const APIManager = Object.create(null, {
             })
                 .then(r => r.json())
         }
-    }
+    },
+
+    saveEvent: {
+        value: (event) => {
+            return fetch("http://localhost:8088/events", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(event)
+            })
+            .then(response => response.json())
+        }
+    },
+    getAllEvents: {
+        value: () => {
+            return fetch("http://localhost:8088/events").then(r => r.json())
+        }
+    },
+    deleteEvent: {
+        value: (id) => {
+            return fetch(`http://localhost:8088/events/${id}`, {
+                method: "DELETE"
+            })
+            .then(r => r.json())
+        }
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 })
 
 module.exports = APIManager

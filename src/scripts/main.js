@@ -4,23 +4,24 @@ const DataManager=require("./DataManager")
 
 
 const LoginFormManager = require("./login")
+const EventFormManager = require("./EventForm")
 const $ = require("jquery")
-
+console.log(EventFormManager)
 $("#loginForm").html(LoginFormManager.renderLoginForm())
 
 $("#loginForm").on("click", "#LoginButton", event => {
     DataManager.getAllUsers().then((users) => {
         const user = users.find(user => {
-            return user.name === $("#usernameTitle").val() && user.password === $("#passwordTitle").val()
+            return user.name === $("#usernameTitle").val() && user.email === $("#email").val()
         })
 
         if (user) {
             sessionStorage.setItem("activeUser", JSON.stringify(user))
             LoginFormManager.clearForm()
             //WORKING
-            $("#loginForm").fadeOut(1000)
+            $("#loginForm").hide()
             //WORKING
-
+            $("#eventForm").html(EventFormManager.renderEventForm()).show()
 
         }else{
             LoginFormManager.clearForm()
@@ -37,7 +38,6 @@ $("#create").on("click", event => {
     const newUser = {
         name: $("#nameTitle").val(),
         email: $("#emailTitle").val(),
-        password: $("#createPassWordTitle").val(),
     }
 
 
@@ -47,4 +47,17 @@ $("#create").on("click", event => {
         .then(() => {
             alert("Thank you for creating an account! Go log in!")
         })
+})
+
+$("#eventForm").on("click", "#saveEventButton", event => {
+    const newEvent = {
+        name: $("#eventTitle").val(),
+        description: $("#eventContent").val(),
+        date: $("#eventDate").val(),
+    }
+    console.log(newEvent)
+
+    DataManager.saveEvent(newEvent).then(() => {
+        EventFormManager.clearForm()
+    })
 })
