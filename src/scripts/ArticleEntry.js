@@ -1,14 +1,14 @@
 // what is generated when you submit the entry.
 // This is how the entry is formatted
-const articleEntry = (article) => {
+const articleEntry = (title, content, id) => {
     return `
             <header class="titleField>
-                <h2>${article.title}</h2>
+                <h2>${title}</h2>
             </header>
             <div class="contentField">
-                ${article.content}
+                ${content}
             </div>
-            <button class="article__delete" id="delete--${article.id}">Delete Article Entry</button>
+            <button class="article__delete" id="delete--${id}">Delete Article Entry</button>
         </div>
     `
 }

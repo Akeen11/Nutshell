@@ -19,7 +19,7 @@ $("#loginForm").on("click", "#LoginButton", event => {
             $("#loginForm").hide()
             //WORKING         
             $("#articleForm").html(ArticleForm.renderArticleForm())
-            listArticles()
+            // listArticles()
 
         } else {
             LoginFormManager.clearForm()
@@ -42,6 +42,24 @@ $("#create").on("click", event => {
             alert("Thank you for creating an account! Go log in!")
         })
 })
+
+const listArticles = () => {
+    DataManager.getAllArticles()
+        .then(allEntries => {
+            articleEntry(allEntries)
+            console.log(allEntries)
+        })
+}
+
+listArticles()
+
+// Handle delete button clicks
+$(".articleEntry").on("click", evt => {
+    if (evt.target.classList.contains("entry__delete")) {
+        const id = parseInt(evt.target.id.split("--")[1])
+        DataManager.deleteArticle(id).then(listEntries)
+    }
+})
 // Event listener for saving the article into the database
 $("#articleForm").on("click", "#saveArticle", () => {
     console.log("please work")
@@ -50,7 +68,6 @@ $("#articleForm").on("click", "#saveArticle", () => {
         content: $("#articleContent").val(),
         date: Date.now()
     }
-
     // Post entries into the to API
     DataManager.saveArticleEntry(newArticle).then(() => {
         ArticleForm.clearForm()
@@ -58,17 +75,3 @@ $("#articleForm").on("click", "#saveArticle", () => {
     })
 })
 
-const listArticles = () => {
-    DataManager.getAllArticles()
-        .then(allEntries => {
-            articleEntry(allEntries)
-        })
-}
-
-// // Handle delete button clicks
-// $(".articleEntry").on("click", evt => {
-//     if (evt.target.classList.contains("entry__delete")) {
-//         const id = parseInt(evt.target.id.split("--")[1])
-//         DataManager.deleteArticle(id).then(listEntries)
-//     }
-// })
