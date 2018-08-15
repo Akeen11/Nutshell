@@ -51,7 +51,31 @@ const APIManager = Object.create(null, {
         }
     },
 
-
+    saveTask: {
+        value: (tasks) => {
+            return fetch("http://localhost:8088/tasks", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(tasks)
+            })
+            .then(response => response.json())
+        }
+    },
+    getAllTasks: {
+        value: () => {
+            return fetch("http://localhost:8088/tasks").then(r => r.json())
+        }
+    },
+    deleteTask: {
+        value: (id) => {
+            return fetch(`http://localhost:8088/tasks/${id}`, {
+                method: "DELETE"
+            })
+            .then(r => r.json())
+        }
+    },
 
 
 

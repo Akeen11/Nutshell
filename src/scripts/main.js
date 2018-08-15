@@ -5,6 +5,7 @@ const DataManager=require("./DataManager")
 
 const LoginFormManager = require("./login")
 const EventFormManager = require("./EventForm")
+const taskFormManager = require("./taskform")
 const $ = require("jquery")
 console.log(EventFormManager)
 $("#loginForm").html(LoginFormManager.renderLoginForm())
@@ -22,6 +23,7 @@ $("#loginForm").on("click", "#LoginButton", event => {
             $("#loginForm").hide()
             //WORKING
             $("#eventForm").html(EventFormManager.renderEventForm()).show()
+            $("#taskForm").html(taskFormManager.renderTaskForm()).show()
 
         }else{
             LoginFormManager.clearForm()
@@ -59,5 +61,19 @@ $("#eventForm").on("click", "#saveEventButton", event => {
 
     DataManager.saveEvent(newEvent).then(() => {
         EventFormManager.clearForm()
+    })
+})
+$("#taskForm").on("click", "#savetasktButton", task => {
+    const newTask = {
+        parseInt(JSON.parse(sessionStorage.getItem("activeUser")).id), //grabs id from active user in session storage
+        name: $("#taskName").val(),
+        description: $("#taskDescription").val(),
+        date: $("#taskCompletionDate").val(),
+
+    }
+    console.log(newTask)
+
+    DataManager.saveTask(newTask).then(() => {
+        taskFormManager.clearForm()
     })
 })
