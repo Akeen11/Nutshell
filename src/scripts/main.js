@@ -1,6 +1,6 @@
 console.log("Welcome to Browserify")
 //const $=require("jquery")
-const DataManager=require("./DataManager")
+const DataManager = require("./DataManager")
 
 
 const LoginFormManager = require("./login")
@@ -25,7 +25,7 @@ $("#loginForm").on("click", "#LoginButton", event => {
             $("#eventForm").html(EventFormManager.renderEventForm()).show()
             $("#taskForm").html(taskFormManager.renderTaskForm()).show()
 
-        }else{
+        } else {
             LoginFormManager.clearForm()
             alert("You need to register")
         }
@@ -65,15 +65,17 @@ $("#eventForm").on("click", "#saveEventButton", event => {
 })
 $("#taskForm").on("click", "#savetasktButton", task => {
     const newTask = {
+        userID:
         parseInt(JSON.parse(sessionStorage.getItem("activeUser")).id), //grabs id from active user in session storage
-        name: $("#taskName").val(),
+    name: $("#taskName").val(),
         description: $("#taskDescription").val(),
-        date: $("#taskCompletionDate").val(),
+            date: $("#taskCompletionDate").val(),
 
     }
-    console.log(newTask)
+},
 
-    DataManager.saveTask(newTask).then(() => {
-        taskFormManager.clearForm()
-    })
+
+DataManager.saveTask(newTask).then(() => {
+    taskFormManager.clearForm()
 })
+)
