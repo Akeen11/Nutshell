@@ -3,32 +3,30 @@ console.log("Welcome to Browserify")
 const DataManager=require("./DataManager")
 const userList=require("./Userlist")
 const LoginFormManager = require("./login")
-const BuildMessage=require("./BuildMessage")
-const SubmitMessage=require("./SubmitMessage")
+const EventFormManager = require("./EventForm")
 const $ = require("jquery")
-
+console.log(EventFormManager)
 $("#loginForm").html(LoginFormManager.renderLoginForm())
 
 $("#loginForm").on("click", "#LoginButton", event => {
     DataManager.getAllUsers().then((users) => {
         const user = users.find(user => {
-            return user.name === $("#usernameTitle").val() && user.password === $("#passwordTitle").val()
+            return user.name === $("#usernameTitle").val() && user.email === $("#email").val()
         })
 
         if (user) {
             sessionStorage.setItem("activeUser", JSON.stringify(user))
             LoginFormManager.clearForm()
-           //WORKING
-           $("#loginForm").hide()
-          // $("#articleForm").html(ArticleForm.renderArticleForm())
-          $("#messages").html(BuildMessage())
-        }else{
+            //WORKING
+            $("#loginForm").hide()
+            //WORKING
+            $("#eventForm").html(EventFormManager.renderEventForm()).show()
 
+        }else{
             LoginFormManager.clearForm()
             alert("You need to register")
         }
     })
-    // (console.log("IT WORKS"))
 })
 
 $("#create").on("click", event => {
@@ -39,19 +37,26 @@ $("#create").on("click", event => {
     const newUser = {
         name: $("#nameTitle").val(),
         email: $("#emailTitle").val(),
-        password: $("#createPassWordTitle").val(),
     }
 
 
     DataManager.saveUserEntry(newUser).then(() => {
         LoginFormManager.clearForm()
-        // $("#usernameTitle").val("")
-        // $("#passwordTitle").val("")
-        // $("#nameTitle").val("")
-        // $("#emailTitle").val("")
-        // $("#createPassWordTitle").val("")
     })
         .then(() => {
             alert("Thank you for creating an account! Go log in!")
         })
+})
+
+$("#eventForm").on("click", "#saveEventButton", event => {
+    const newEvent = {
+        name: $("#eventTitle").val(),
+        description: $("#eventContent").val(),
+        date: $("#eventDate").val(),
+    }
+    console.log(newEvent)
+
+    DataManager.saveEvent(newEvent).then(() => {
+        EventFormManager.clearForm()
+    })
 })
