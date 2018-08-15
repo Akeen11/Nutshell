@@ -16,6 +16,7 @@ const LoginFormManager = Object.create(null, {
     renderLoginForm: {
         value: () => {
             return `
+            <h1>Welcome!</h1>
             <h2>Sign In</h2>
             <article class="userField">
             <label for="username">Username:</label>
@@ -29,11 +30,11 @@ const LoginFormManager = Object.create(null, {
                     <button id="LoginButton" class="LoginButton">Login</button>
                     <h2>Create Account</h2>
                     <article class="nameField">
-                    <label for="createName">Name:</label>
+                    <label for="createName">Userame:</label>
                     <input required type="text" id="nameTitle" placeholder="name">
                     </article>
                     <article class="userField">
-                    <label for="createUser">Username:</label>
+                    <label for="createUser">Email Address:</label>
                     <input required type="text" id="emailTitle" placeholder="email address">
                     </article>
                     <article class="passwordField">

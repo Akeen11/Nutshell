@@ -20,6 +20,10 @@ $("#loginForm").on("click", "#LoginButton", event => {
         if (user) {
             sessionStorage.setItem("activeUser", JSON.stringify(user))
             //hide
+            //WORKING
+            // $("#loginForm").hide()
+            //WORKING
+
 
         }else{
             alert("You need to register")
