@@ -3,14 +3,12 @@ console.log("Welcome to Browserify")
 const DataManager=require("./DataManager")
 const userList=require("./Userlist")
 const LoginFormManager = require("./login")
+const BuildMessage=require("./BuildMessage")
+const SubmitMessage=require("./SubmitMessage")
 const $ = require("jquery")
 
 $("#loginForm").html(LoginFormManager.renderLoginForm())
 
-// $("#loginForm").on("click", event => {
-//     if (event.target.classList.contains("LoginButton"))
-//         (console.log("IT WORKS"))
-// })
 $("#loginForm").on("click", "#LoginButton", event => {
     DataManager.getAllUsers().then((users) => {
         const user = users.find(user => {
@@ -19,15 +17,15 @@ $("#loginForm").on("click", "#LoginButton", event => {
 
         if (user) {
             sessionStorage.setItem("activeUser", JSON.stringify(user))
-            //hide
-            //WORKING
-            // $("#loginForm").hide()
-            //WORKING
-
-
-        }else{
-            alert("You need to register")
             LoginFormManager.clearForm()
+           //WORKING
+           $("#loginForm").hide()
+          // $("#articleForm").html(ArticleForm.renderArticleForm())
+          $("#messages").html(BuildMessage())
+        }else{
+
+            LoginFormManager.clearForm()
+            alert("You need to register")
         }
     })
     // (console.log("IT WORKS"))
