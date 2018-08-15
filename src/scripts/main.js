@@ -4,6 +4,9 @@ const DataManager=require("./DataManager")
 const userList=require("./Userlist")
 const LoginFormManager = require("./login")
 const EventFormManager = require("./EventForm")
+const MessageFormManager = require("./BuildMessage")
+const messageComponent = require("./message")
+
 const $ = require("jquery")
 console.log(EventFormManager)
 $("#loginForm").html(LoginFormManager.renderLoginForm())
@@ -20,7 +23,8 @@ $("#loginForm").on("click", "#LoginButton", event => {
             //WORKING
             $("#loginForm").hide()
             //WORKING
-            $("#eventForm").html(EventFormManager.renderEventForm()).show()
+            $("#messages").html(MessageFormManager.renderMessageForm()).show()
+           $("#eventForm").html(EventFormManager.renderEventForm()).show()
 
         }else{
             LoginFormManager.clearForm()
@@ -46,6 +50,20 @@ $("#create").on("click", event => {
         .then(() => {
             alert("Thank you for creating an account! Go log in!")
         })
+})
+
+
+$("#messages").on("click","#message-btn", event => {
+    let user = JSON.parse(sessionStorage.getItem("activeUser"))
+    const newMessage = {
+    name:$("#message-input").val(),
+    userId: user.id,
+    userName: user.name
+    }
+    console.log(newMessage)
+    DataManager.saveMessage(newMessage).then(() => {
+        MessageFormManager.clearForm()
+})
 })
 
 $("#eventForm").on("click", "#saveEventButton", event => {

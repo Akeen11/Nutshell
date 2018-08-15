@@ -1,34 +1,22 @@
-const $ = require("jquery")
-const BuildMessage = require("./BuildMessage")
-const DataManager = require("./DataManager")
+// const $ = require("jquery")
+// const makeMessage = require("./message")
+// const messageFormManager = require("./BuildMessage")
+// const DataManager = require("./DataManager")
+// document.querySelector("#message-btn").addEventListener("click", () => {
 
-const activateMeassgeForm = () => {
-document.querySelector("#message-btn").addEventListener("click", () => {
-        let message = $("#message-input").val()
-        makeMessage = (message, userId) => {
+//     const activateMeassgeForm = () => {
+//         console.log("Submit Message")
+//         let message = $("#message-input").val()
+//         let user = JSON.parse(sessionStorage.getItem("activeUser"))
+//         const userMessage = {
+//             userId: user.id,
+//             message: message
+//         }
 
-            let mess = document.createElement("p")
-            DataManager.getAllUsers(userId).then(function (response) {
-                mess.textContent = `${users.name}: ${message}`
-                //mess.className += `message ${id}`
-                // $("<button>").attr('type', 'button').attr('class', 'edit-btn').text("Edit").appendTo(mess)
-                // editMess(mess)
-            })
-              $("#message-box").append(mess)
-        //     let userIdNum = parseInt(userId)
-        //     DataManager.postMessage(message, userIdNum).then(function (response) {
-        //         // console.log("this is the message the is being passed to the function:", mess)
-        //         mess.id = `${response.id}`
+//         DataManager.saveMessage(activateMeassgeForm).then(() => {
+//             messageFormManager.clearForm()
+//         })
+//     })
+//    }  // makeMessage (message, userId) =>
 
-        //     })
-        // }
-
-
-        // let currentUser = sessionStorage.setItem("User")
-        // $("#message-input").val("")
-        // makeMess(message, currentUse);
-        // scrollBottom()
-    }
-})
-}
-module.exports = submitMessage
+// module.exports = activateMeassgeForm

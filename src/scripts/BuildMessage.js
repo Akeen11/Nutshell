@@ -1,25 +1,37 @@
 const $ = require("jquery")
 //const apiManager = require("./DataManager")
+const MeassageFormManager  = Object.create(null, {
+    clearForm: {
+        value: () => {
+            $("#message-input").val("")
+            //$("#message-btn").val("")
 
-const buildMessageArticle = ()=> {
+        }
+    },
+
+ renderMessageForm :{
+     value: ()=> {
      console.log("Messeges")
      return`
      
-     <form>
+     <div>
      <fieldset>
      <legend> Welcome:</legend>
-     <h2 id = "message-header"> Start Chatting </h2>
-     <article id ="message-article>
-     <section id = "message-section">
-     <div id = "message-box">
-     <input required type="text" id = "message-input" placeholder="Meassge">
-     <button class="messageButton" id = "message-btn">Send Message</button>
+     <h2 id="message-header"> Start Chatting </h2>
+     <article id="message-article>
+     <section id="message-section">
+     <div id="message-box">
+     <input required type="text" id="message-input" placeholder="Meassge">
+     <button class="messageButton" id="message-btn">Send Message</button>
      </div>
      </section>
      </article>
      </fieldset>
-     </form>`
+     </div>`
     }
+ }
+})
+
 //      const $header=$("<h2>")
 //      $header.attr("id","Message-header")
 //      $header.text(" Start Chat")
@@ -34,4 +46,4 @@ const buildMessageArticle = ()=> {
 //   let $button=  $("<button>").attr("type", "button").attr("id", "message-btn").text("Send Message").appendTo($inputDiv)
 //     $inputDiv.appendTo($messageArticle)
 //buildMessageArticle()
-module.exports=buildMessageArticle
+module.exports=MeassageFormManager
