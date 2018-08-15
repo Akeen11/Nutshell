@@ -1,20 +1,20 @@
-const createEvent = (userId, name, description, date, id) => {
+const createEvent = (userId, name, location, date, id) => {
     return `
-    <article class="entry border border-dark">
+    <fieldset>
         <section>
             ${userId}
         </section>
-        <header>
-            <h2>${name}</h2>
-        </header>
+        <seciton>
+            <h4>${name}</h4>
+        </seciton>
         <section>
-            ${description}
+            ${location}
         </section>
-        <footer>
+        <section>
             <time>${date}</time>
-        </footer>
-        <button id="deleteEntryButton--${id}" class="entry__delete">Delete Entry</button>
-    </article>
+        </section>
+        <button id="deleteEventButton--${id}" class="event__delete">Delete Event</button>
+    </fieldset>
     `
 }
 
