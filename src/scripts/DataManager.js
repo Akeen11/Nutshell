@@ -15,7 +15,7 @@ const APIManager = Object.create(null, {
     // getting users
     getAllUsers: {
         value: () => {
-            return fetch("http://localhost:8088/users/").then(r => r.json())
+            return fetch("http://localhost:8088/users").then(r => r.json())
         }
     },
     getAllArticles: {
@@ -45,6 +45,44 @@ const APIManager = Object.create(null, {
                 .then(r => r.json())
         }
     },
+    getMassage: {
+        value: (Id) => {
+            return fetch("http://localhost:8088/Message")
+                .then(res => res.json())
+        }
+    },
+
+    saveMessage: {
+        value: (message) => {
+            return fetch("http://localhost:8088/Messages", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(message)
+            })
+                .then(res => res.json())
+        }
+    },
+    putMessage: {
+        value: (id) => {
+            return fetch(`http://localhost:8088/Messages/${id}`, {
+                method: "PUT",
+
+            })
+                .then(res => res.json())
+        }
+    },
+    deleteMessage: {
+        value: (id) => {
+            return fetch(`http://localhost:8088/Messages/${id}`, {
+                method: "DELETE",
+
+            })
+                .then(res => res.json())
+        }
+    },
+
     getAllEvents: {
         value: () => {
             return fetch("http://localhost:8088/events").then(r => r.json())
@@ -81,7 +119,7 @@ const APIManager = Object.create(null, {
                 },
                 body: JSON.stringify(tasks)
             })
-                .then(response => response.json())
+            .then(response => response.json())
         }
     },
     getAllTasks: {
@@ -94,7 +132,7 @@ const APIManager = Object.create(null, {
             return fetch(`http://localhost:8088/tasks/${id}`, {
                 method: "DELETE"
             })
-                .then(r => r.json())
+            .then(r => r.json())
         }
     },
 
