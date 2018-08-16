@@ -96,7 +96,7 @@ const APIManager = Object.create(null, {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(article)
+                body: JSON.stringify(event)
             })
                 .then(response => response.json())
         }

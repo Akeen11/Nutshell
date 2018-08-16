@@ -9,6 +9,8 @@ const EventFormManager = require("./EventForm")
 const MessageFormManager = require("./BuildMessage")
 const messageComponent = require("./message")
 const listMessage = require("./MessageList")
+const taskFormManager = require("./taskform")
+const listTasks = require("./tasklist")
 const listEvents = require("./EventList")
 const $ = require("jquery")
 
@@ -44,6 +46,10 @@ $("#loginForm").on("click", "#LoginButton", event => {
 
             $("#eventForm").on("click", "#logoutButton", event => {
                 sessionStorage.removeItem("activeUser")
+                $("#taskForm").html("")
+                $("#taskList").html("")
+                $("#articleForm").html("")
+                $("#articleEntry").html("")
                 $("#eventForm").html("")
                 $("#eventList").html("")
                 $("#loginForm").html(LoginFormManager.renderLoginForm()).show()
