@@ -42,7 +42,9 @@ $("#loginForm").on("click", "#LoginButton", event => {
 
             listEvents() 
             listArticles()
-            listTasks()//writes eventlist to DOM
+            listTasks()
+            listMessage()
+            //writes eventlist to DOM
 
             $("#eventForm").on("click", "#logoutButton", event => {
                 sessionStorage.removeItem("activeUser")
@@ -52,6 +54,8 @@ $("#loginForm").on("click", "#LoginButton", event => {
                 $("#articleEntry").html("")
                 $("#eventForm").html("")
                 $("#eventList").html("")
+                $("#message").html("")
+                $("#messageList").html("")
                 $("#loginForm").html(LoginFormManager.renderLoginForm()).show()
             })
 

@@ -47,14 +47,14 @@ const APIManager = Object.create(null, {
     },
     getMassage: {
         value: (Id) => {
-            return fetch("http://localhost:8088/Messages")
+            return fetch("http://localhost:8088/Message")
                 .then(res => res.json())
         }
     },
 
     saveMessage: {
         value: (message) => {
-            return fetch("http://localhost:8088/Messages", {
+            return fetch("http://localhost:8088/Message", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -66,7 +66,7 @@ const APIManager = Object.create(null, {
     },
     putMessage: {
         value: (id) => {
-            return fetch(`http://localhost:8088/Messages/${id}`, {
+            return fetch(`http://localhost:8088/Message/${id}`, {
                 method: "PUT",
 
             })
@@ -75,7 +75,7 @@ const APIManager = Object.create(null, {
     },
     deleteMessage: {
         value: (id) => {
-            return fetch(`http://localhost:8088/Messages/${id}`, {
+            return fetch(`http://localhost:8088/Message/${id}`, {
                 method: "DELETE",
 
             })
