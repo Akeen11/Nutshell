@@ -1,4 +1,5 @@
 const APIManager = Object.create(null, {
+    // saving users
     saveUserEntry: {
         value: (user) => {
             return fetch("http://localhost:8088/users", {
@@ -11,55 +12,44 @@ const APIManager = Object.create(null, {
                 .then(response => response.json())
         }
     },
+    // getting users
     getAllUsers: {
         value: () => {
             return fetch("http://localhost:8088/users").then(r => r.json())
         }
     },
-    deleteUser: {
+    getAllArticles: {
+        value: () => {
+            return fetch("http://localhost:8088/articles?_order=desc&_sort=date").then(r => r.json())
+        }
+    },
+    // getting articles
+    saveArticleEntry: {
+        value: (article) => {
+            return fetch("http://localhost:8088/articles", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(article)
+            })
+                .then(response => response.json())
+        }
+    },
+    // deleting an article. Targetting Id
+    deleteArticle: {
         value: (id) => {
-            return fetch(`http://localhost:8088/users/${id}`, {
+            return fetch(`http://localhost:8088/articles/${id}`, {
                 method: "DELETE"
             })
                 .then(r => r.json())
         }
     },
-    getMassage: {
-        value: (Id) => {
-            return fetch("http://localhost:8088/Message")
-                .then(res => res.json())
+    getAllEvents: {
+        value: () => {
+            return fetch("http://localhost:8088/events").then(r => r.json())
         }
     },
-    postMessage(msg, user) {
-        return fetch ("http://localhost:8088/Messages",{
-             method: "POST",
-             data: {
-                 "userId": user,
-                 "message": msg
-             }
-         })
-         .then(res=>res.json())
-     },
-     putMessage(user, msg, id) {
-        return fetch (`http://localhost:8088/Messages/${id}`,{
-             method: "PUT",
-             data: {
-                 "userId": user,
-                 "Message": msg
-             }
-         })
-         .then(res=>res.json())
-     },
-     deleteMessage(user, msg, id) {
-        return fetch (`http://localhost:8088/Messages/${id}`,{
-             method: "DELETE",
-             data: {
-                 "userId": user,
-                 "Message": msg
-             }
-         })
-         .then(res=>res.json())
-     }
 
     saveEvent: {
         value: (event) => {
@@ -68,26 +58,45 @@ const APIManager = Object.create(null, {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(event)
+                body: JSON.stringify(article)
             })
-            .then(response => response.json())
+                .then(response => response.json())
         }
     },
-    getAllEvents: {
-        value: () => {
-            return fetch("http://localhost:8088/events").then(r => r.json())
-        }
-    },
+
     deleteEvent: {
         value: (id) => {
             return fetch(`http://localhost:8088/events/${id}`, {
                 method: "DELETE"
             })
-            .then(r => r.json())
+                .then(r => r.json())
+        },
+    },
+    saveTask: {
+        value: (tasks) => {
+            return fetch("http://localhost:8088/tasks", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(tasks)
+            })
+                .then(response => response.json())
         }
     },
-
-
+    getAllTasks: {
+        value: () => {
+            return fetch("http://localhost:8088/tasks").then(r => r.json())
+        }
+    },
+    deleteTask: {
+        value: (id) => {
+            return fetch(`http://localhost:8088/tasks/${id}`, {
+                method: "DELETE"
+            })
+                .then(r => r.json())
+        }
+    },
 
 
 

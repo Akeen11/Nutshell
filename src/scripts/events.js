@@ -1,8 +1,8 @@
-const createEvent = (userId, name, location, date, id) => {
+const createEvent = (userId, name, location, date, id, userName) => {
     return `
     <fieldset>
         <section>
-            ${userId}
+            ${userName}
         </section>
         <seciton>
             <h4>${name}</h4>

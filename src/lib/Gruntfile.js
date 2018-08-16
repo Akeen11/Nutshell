@@ -20,7 +20,7 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: {
-                    "../../dist/bundle.js": ["../scripts/main.js", "./node_modules"]
+                    "../../dist/bundle.js": ["../scripts/main.js"]
                 }
             }
         },
