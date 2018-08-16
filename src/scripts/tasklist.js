@@ -1,18 +1,20 @@
-const createEvent = require("./taskentry")
-const DataManager = require("./DataManager")
+const createTask = require("./newtasks.js")
+const DataManager = require("./DataManager.js")
 const $ = require("jquery")
 
 listTasks = () => {
     DataManager.getAllTasks()
         .then(results => {
-            results.forEach(entries => {
-                let taskComponent = createTask(tasks.userId, tasks.title, tasks.description, tasks.date, tasks.id)
+            results.forEach(tasks => {
+                let taskComponent = createTask( tasks.name, tasks.description, tasks.date, tasks.id)
+                writeEventsToDOM(taskComponent)
             })
         });
-}
 
-writeEventsToDOM = (tasks => {
-    $("#taskList").html += (tasks)
+
+    writeEventsToDOM = (tasks => {
+        $("#taskList").append(tasks)
+    }
+    )
 }
-)
 module.exports = listTasks
