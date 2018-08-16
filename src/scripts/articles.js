@@ -2,7 +2,7 @@
 // This is how the entry is formatted
 const createArticle = (title, date, content, URL, id ) => {
     return `
-    <fielset>
+    <fieldset>
             <header class="titleField">
                 <h2>${title}</h2>
             </header>
