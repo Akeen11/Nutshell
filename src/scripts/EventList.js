@@ -7,7 +7,7 @@ listEvents = () => {
         .then(results => {
             $("#eventList").empty() //clears div before rendering list of events
             results.forEach(event => { //loops through each event grabbing info
-                let eventComponent = createEvent(event.userId, event.name, event.location, event.date, event.id)
+                let eventComponent = createEvent(event.userId, event.name, event.location, event.date, event.id, event.userName)
                 writeEventsToDOM(eventComponent) //calls function to write event list to DOM
             })
         });
