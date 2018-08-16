@@ -3,7 +3,7 @@ const DataManager = require("./DataManager")
 const $ = require("jquery")
 
 listMessage = () => {
-    DataManager.getMessage() //calls function to get message from DB
+    DataManager.getMessages() //calls function to get message from DB
         .then(results => {
             $("#messageList").empty() //clears div before rendering list of message
             results.forEach(message => { //loops through each message grabbing info

@@ -47,7 +47,7 @@ const APIManager = Object.create(null, {
     },
     getMassage: {
         value: (Id) => {
-            return fetch("http://localhost:8088/Message")
+            return fetch("http://localhost:8088/Messages")
                 .then(res => res.json())
         }
     },

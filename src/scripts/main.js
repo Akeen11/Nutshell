@@ -7,7 +7,7 @@ const ArticleForm = require("./ArticleForm")
 const listArticles = require("./ArticleList")
 const EventFormManager = require("./EventForm")
 const MessageFormManager = require("./BuildMessage")
-//const messageComponent = require("./message")
+const messageComponent = require("./message")
 const listMessage = require("./MessageList")
 const listEvents = require("./EventList")
 const $ = require("jquery")
@@ -29,14 +29,18 @@ $("#loginForm").on("click", "#LoginButton", event => {
             //WORKING
             $("#messages").html(MessageFormManager.renderMessageForm()).show()
             $("#eventForm").html(EventFormManager.renderEventForm()).show()
-            sessionStorage.setItem("activeUser", JSON.stringify(user)) //sets active user to session storage
-            LoginFormManager.clearForm() //clears form after button click
+            $("#taskForm").html(taskFormManager.renderTaskForm()).show()
+            $("#articleForm").html(ArticleForm.renderArticleForm()).show()
+            // sessionStorage.setItem("activeUser", JSON.stringify(user)) //sets active user to session storage
+            // LoginFormManager.clearForm() //clears form after button click
 
-            $("#loginForm").hide() //hides login form after user login
+            // $("#loginForm").hide() //hides login form after user login
 
-            $("#eventForm").html(EventFormManager.renderEventForm()).show() //writes eventform to DOM after login form is hidden
+            // $("#eventForm").html(EventFormManager.renderEventForm()).show() //writes eventform to DOM after login form is hidden
 
-            listEvents() //writes eventlist to DOM
+            listEvents() 
+            listArticles()
+            listTasks()//writes eventlist to DOM
 
             $("#eventForm").on("click", "#logoutButton", event => {
                 sessionStorage.removeItem("activeUser")
