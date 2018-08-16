@@ -12,6 +12,7 @@ const taskFormManager = Object.create(null, {
     renderTaskForm: {
         value: () => {
             return `
+            <h2>Tasks</h2>
             <div class="border">
                 <fieldset>
                     <label for="taskName">Task</label>

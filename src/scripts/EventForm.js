@@ -11,7 +11,9 @@ const FormManager = Object.create(null, {
     renderEventForm: {
         value: () => {
             return `
-            <h2>Events</h2>
+            <button id="logoutButton" style="background-color: red; color: white; position: absolute; right: 0px; margin: 12px">Logout</button>
+            <h2 style="center: 0; border: 10px, groove; margin-right: 500px">Nutshell</h2>
+            <div>
                 <fieldset>
                 <legend>Events</legend>
                     <label for="eventTitle">Title:</label>
@@ -22,11 +24,12 @@ const FormManager = Object.create(null, {
                     <input required type="text" id="eventContent">
                 </fieldset>
                 <fieldset>
-                    <label for="eventDate">Event Date:</label>
+                    <label for="eventDate">Date:</label>
                     <input required type="date" id="eventDate">
                 </fieldset>
                 <button id="saveEventButton">Save Event</button>
             </div>
+            <h2>Events</h2>
             `
         }
     }

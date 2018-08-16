@@ -1,4 +1,5 @@
 const APIManager = Object.create(null, {
+    // saving users
     saveUserEntry: {
         value: (user) => {
             return fetch("http://localhost:8088/users", {
@@ -11,17 +12,42 @@ const APIManager = Object.create(null, {
                 .then(response => response.json())
         }
     },
+    // getting users
     getAllUsers: {
         value: () => {
             return fetch("http://localhost:8088/users").then(r => r.json())
         }
     },
-    deleteUser: {
+    getAllArticles: {
+        value: () => {
+            return fetch("http://localhost:8088/articles?_order=desc&_sort=date").then(r => r.json())
+        }
+    },
+    // getting articles
+    saveArticleEntry: {
+        value: (article) => {
+            return fetch("http://localhost:8088/articles", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(article)
+            })
+                .then(response => response.json())
+        }
+    },
+    // deleting an article. Targetting Id
+    deleteArticle: {
         value: (id) => {
-            return fetch(`http://localhost:8088/users/${id}`, {
+            return fetch(`http://localhost:8088/articles/${id}`, {
                 method: "DELETE"
             })
                 .then(r => r.json())
+        }
+    },
+    getAllEvents: {
+        value: () => {
+            return fetch("http://localhost:8088/events").then(r => r.json())
         }
     },
 
@@ -37,20 +63,15 @@ const APIManager = Object.create(null, {
                 .then(response => response.json())
         }
     },
-    getAllEvents: {
-        value: () => {
-            return fetch("http://localhost:8088/events").then(r => r.json())
-        }
-    },
+
     deleteEvent: {
         value: (id) => {
             return fetch(`http://localhost:8088/events/${id}`, {
                 method: "DELETE"
             })
                 .then(r => r.json())
-        }
+        },
     },
-
     saveTask: {
         value: (tasks) => {
             return fetch("http://localhost:8088/tasks", {
@@ -93,6 +114,7 @@ const APIManager = Object.create(null, {
 
 
 //use put method pass two values (id,tasks) use post and delete method functions to do this
+
 
 
 

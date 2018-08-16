@@ -10,12 +10,12 @@ listTasks = () => {
             })
             incompleteTasks.forEach(tasks => {
                 let taskComponent = createTask( tasks.name, tasks.description, tasks.date, tasks.id)
-                writeEventsToDOM(taskComponent)
+                writeTasksToDOM(taskComponent)
             })
         });
 
 
-    writeEventsToDOM = (tasks => {
+    writeTasksToDOM = (tasks => {
         $("#taskList").append(tasks)
     }
     )
