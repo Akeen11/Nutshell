@@ -1,8 +1,4 @@
-console.log("Welcome to Browserify")
-//const $=require("jquery")
 const DataManager = require("./DataManager")
-
-
 const LoginFormManager = require("./login")
 const EventFormManager = require("./EventForm")
 const taskFormManager = require("./taskform")
@@ -33,7 +29,15 @@ $("#loginForm").on("click", "#LoginButton", event => {
             $("#loginForm").hide() //hides login form after user login
 
             $("#eventForm").html(EventFormManager.renderEventForm()).show() //writes eventform to DOM after login form is hidden
+
             listEvents() //writes eventlist to DOM
+
+            $("#eventForm").on("click", "#logoutButton", event => {
+                sessionStorage.removeItem("activeUser")
+                $("#eventForm").html("")
+                $("#eventList").html("")
+                $("#loginForm").html(LoginFormManager.renderLoginForm()).show()
+            })
 
         } else {
             LoginFormManager.clearForm()
@@ -60,8 +64,10 @@ $("#create").on("click", event => {
 })
 
 $("#eventForm").on("click", "#saveEventButton", event => { //puts click event on save event button
+    const userObject = JSON.parse(sessionStorage.getItem("activeUser"))
     const newEvent = { //creates event to be pushed to DB
-        userId: parseInt(JSON.parse(sessionStorage.getItem("activeUser")).id), //grabs id from active user in session storage
+        userId: userObject.id, //grabs id from active user in session storage
+        userName: userObject.name,
         name: $("#eventTitle").val(),
         location: $("#eventContent").val(),
         date: $("#eventDate").val(),
