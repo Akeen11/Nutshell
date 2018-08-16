@@ -3,6 +3,7 @@ const $ = require("jquery")
 const ArticleForm = Object.create(null, {
     clearForm: {
         value: () => {
+            $("#userID").val("")
             $("#articleTitle").val("")
             $("#articleContent").val("")
             $("#eventDate").val("")
@@ -13,6 +14,7 @@ const ArticleForm = Object.create(null, {
             return `
                 <h2>Articles</h2>
                 <fieldset class="titleField">
+                <label for="userID"></label>
                     <label for="articleTitle">Article Title:</label>
                     <p></p>
                     <input required type="text" id="articleTitle" placeholder="Article Title" size="35">

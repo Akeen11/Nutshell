@@ -1,8 +1,11 @@
 // what is generated when you submit the entry.
 // This is how the entry is formatted
-const createArticle = (title, date, content, URL, id ) => {
+const createArticle = (name, title, date, content, URL, id) => {
     return `
     <fieldset>
+    <section>
+    ${name}
+    </section
             <header class="titleField">
                 <h2>${title}</h2>
             </header>
@@ -15,9 +18,10 @@ const createArticle = (title, date, content, URL, id ) => {
             <div class="urlField">
                 ${URL}
             </div>
-            <button id="deleteArticleButton--${id}" class="article__delete">Delete Article Entry</button>
         </div>
     </fieldset>
+    <p></p>
+    <button id="deleteArticleButton--${id}" class="article__delete">Delete Article Entry</button>
     `
 }
 

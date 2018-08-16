@@ -7,7 +7,7 @@ listArticles = () => {
         .then(results => {
             $("#articleEntry").empty() //clears div before rendering list of events
             results.forEach(article => { //loops through each event grabbing info
-                let articleComponent = createArticle(article.title, article.date, article.content, article.URL, article.id)
+                let articleComponent = createArticle(article.userID, article.title, article.date, article.content, article.URL, article.id)
                 writeArticlesToDOM(articleComponent) //calls function to write event list to DOM
             })
         });

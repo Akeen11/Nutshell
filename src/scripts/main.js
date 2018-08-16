@@ -59,7 +59,9 @@ $("#create").on("click", event => {
 
 // Event listener for saving the article into the database
 $("#articleForm").on("click", "#saveArticle", event => {
+    const userIDName = JSON.parse(sessionStorage.getItem("activeUser"))
     const newArticle = {
+        userName: userIDName.name,
         title: $("#articleTitle").val(),
         content: $("#articleContent").val(),
         date: $("#articleDate").val(),
