@@ -5,8 +5,8 @@ const userList = require("./Userlist")
 const LoginFormManager = require("./login")
 const EventFormManager = require("./EventForm")
 const MessageFormManager = require("./BuildMessage")
-const messageComponent = require("./message")
-
+//const messageComponent = require("./message")
+const listMessage = require("./MessageList")
 const listEvents = require("./EventList")
 const $ = require("jquery")
 
@@ -62,19 +62,34 @@ $("#create").on("click", event => {
 $("#messages").on("click", "#message-btn", event => {
     let user = JSON.parse(sessionStorage.getItem("activeUser"))
     const newMessage = {
-        Message: $("#message-input").val(),
+        message: $("#message-input").val(),
         userId: user.id,
         userName: user.name
     }
     console.log(newMessage)
     DataManager.saveMessage(newMessage).then(() => {
         MessageFormManager.clearForm()
-    })
+        $("#messageList").html("") //clears page before rerendering list from DB
+        listMessage()
+})
+})
+$("#messageList").on("click", evt => { //bubbles click event to event list ID
+    if (evt.target.classList.contains("message__delete")) { //places click event on delete event button
+        const id = parseInt(evt.target.id.split("--")[1]) //splits and specifies specific button id's
+        DataManager.deleteMessage(id) //calls delete function
+            // .then(() => {
+            //     $("#messageList").empty() //clears div before rerendering event list
+            // })
+            .then(() => {
+                listMessage() //rerenders event list
+            }
+            )
+    }
 })
 
 $("#eventForm").on("click", "#saveEventButton", event => {
-    const newEvent = {
-        $("#eventForm").on("click", "#saveEventButton", event => { //puts click event on save event button
+    // const newEvent = {
+    //     $("#eventForm").on("click", "#saveEventButton", event => {//puts click event on save event button
         const newEvent = { //creates event to be pushed to DB
             userId: parseInt(JSON.parse(sessionStorage.getItem("activeUser")).id), //grabs id from active user in session storage
             name: $("#eventTitle").val(),
@@ -89,6 +104,7 @@ $("#eventForm").on("click", "#saveEventButton", event => {
             listEvents() //renders event list to DOM
         })
     })
+
 
 $("#eventList").on("click", evt => { //bubbles click event to event list ID
     if (evt.target.classList.contains("event__delete")) { //places click event on delete event button

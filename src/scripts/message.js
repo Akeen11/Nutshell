@@ -1,13 +1,18 @@
-const messageComponent =  (userId ,name, id)=>{
+const createMessage =  (userId ,name, message, id)=>{
     return`
     <div class="entry">
+    <fieldset>
     <header class="entry__header">
-        <h2>${userId}</h2>
+        <h3>${userId}</h3>
     </header>
+    <div id="entry_name">
+    <h3>${name}</h3>
     <article class="entry__content">
-        ${name}
+       <p>:${message}</p>
     </article>
-    <button class="entry__delete" id="deleteMessage--${id}">Delete Meassage</button>
+    <button class="message__delete" id="deleteMessage--${id}">Delete Meassage</button>
+    </fieldset>
+    </div>
     `
 }
-module.exports=messageComponent
+module.exports=createMessage
