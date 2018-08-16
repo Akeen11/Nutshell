@@ -6,7 +6,7 @@ const DataManager = require("./DataManager")
 const LoginFormManager = require("./login")
 const EventFormManager = require("./EventForm")
 const taskFormManager = require("./taskform")
-const listOfTasks = require("./tasklist")
+const listTasks = require("./tasklist")
 const listEvents = require("./EventList")
 const $ = require("jquery")
 
@@ -25,16 +25,18 @@ $("#loginForm").on("click", "#LoginButton", event => {
             $("#loginForm").hide()
             //WORKING
             $("#eventForm").html(EventFormManager.renderEventForm()).show()
-            $("#taskForm").html(taskFormManager.renderTaskForm()).show()
+
 
             sessionStorage.setItem("activeUser", JSON.stringify(user)) //sets active user to session storage
             LoginFormManager.clearForm() //clears form after button click
 
             $("#loginForm").hide() //hides login form after user login
 
-            $("#eventForm").html(EventFormManager.renderEventForm()).show() //writes eventform to DOM after login form is hidden
-            listEvents() //writes eventlist to DOM
-
+            $("#eventForm").html(EventFormManager.renderEventForm()).show()
+              listEvents()
+            //writes eventform to DOM after login form is hidden
+            $("#taskForm").html(taskFormManager.renderTaskForm()).show() //writes eventlist to DOM
+            listTasks()
         } else {
             LoginFormManager.clearForm()
             alert("You need to register")
@@ -99,6 +101,7 @@ $("#taskForm").on("click", "#savetasktButton", task => {
         name: $("#taskName").val(),
         description: $("#taskDescription").val(),
         date: $("#taskCompletionDate").val(),
+        completed:false
     }
 
     DataManager.saveTask(newTask).then(() => {
@@ -116,8 +119,21 @@ $("#taskList").on("click", evt => { //bubbles click event to task list ID
                 $("#taskList").empty()
                 listTasks()
 
-
             })
     }
 })
 
+$("#taskList").on("click", evt => { //bubbles click event to task list ID
+    if (evt.target.classList.contains("task__completed")) { //places click event on delete task button
+        const id = parseInt(evt.target.id.split("--")[1])
+        let editedTask = {
+            completed:true
+        }
+        DataManager.completedTasks(id, editedTask) //calls delete function
+            .then(() => {
+                $("#taskList").empty()
+                listTasks()
+
+            })
+    }
+})

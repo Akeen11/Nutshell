@@ -34,7 +34,7 @@ const APIManager = Object.create(null, {
                 },
                 body: JSON.stringify(event)
             })
-            .then(response => response.json())
+                .then(response => response.json())
         }
     },
     getAllEvents: {
@@ -47,7 +47,7 @@ const APIManager = Object.create(null, {
             return fetch(`http://localhost:8088/events/${id}`, {
                 method: "DELETE"
             })
-            .then(r => r.json())
+                .then(r => r.json())
         }
     },
 
@@ -60,7 +60,7 @@ const APIManager = Object.create(null, {
                 },
                 body: JSON.stringify(tasks)
             })
-            .then(response => response.json())
+                .then(response => response.json())
         }
     },
     getAllTasks: {
@@ -73,26 +73,42 @@ const APIManager = Object.create(null, {
             return fetch(`http://localhost:8088/tasks/${id}`, {
                 method: "DELETE"
             })
-            .then(r => r.json())
+                .then(r => r.json())
         }
     },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    completedTasks: {
+        value: (id, task) => {
+            return fetch(`http://localhost:8088/tasks/${id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(task)
+            })
+                .then(response => response.json())
+        }
+    }
 
 })
+
+
+//use put method pass two values (id,tasks) use post and delete method functions to do this
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = APIManager

@@ -18,15 +18,16 @@ const taskFormManager = Object.create(null, {
                     <input required type="text" id="taskName"
 
 
-                    <label for="taskDescription">task Instructions</label>
+                    <label for="taskDescription">details</label>
                     <textarea id="taskDescription"></textarea>
 
 
                 <label for="#taskCompletionDate">Completion Date:</label>
                 <input required type="date" id="taskCompletionDate">
-            
+
                 <button id="savetasktButton">Save Task</button>
                 </fieldset>
+                
 
             </div>
             `
