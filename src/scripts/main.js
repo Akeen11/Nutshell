@@ -1,12 +1,11 @@
 const DataManager = require("./DataManager")
 const LoginFormManager = require("./login")
 const ArticleForm = require("./ArticleForm")
-const articleEntryList = require("./ArticleList")
+const listArticles = require("./ArticleList")
 const EventFormManager = require("./EventForm")
 const listEvents = require("./EventList")
 const $ = require("jquery")
 
-console.log("something", articleEntryList)
 
 $("#loginForm").html(LoginFormManager.renderLoginForm()) //renders login form to DOM
 
@@ -40,7 +39,7 @@ $("#loginForm").on("click", "#LoginButton", event => {
 })
 
 $("#create").on("click", event => {
-   
+
     // Get form field values
     // Create object from them
     const newUser = { //creates user to be saved to DB
@@ -56,37 +55,38 @@ $("#create").on("click", event => {
         })
 })
 
-const listArticles = () => {
-    DataManager.getAllArticles()
-        .then(allEntries => {
-            articleEntryList(allEntries)
-            console.log(allEntries)
-        })
-}
+// !!! Start of Article Stuff !!!
 
-listArticles()
-
-// Handle delete button clicks
-$(".articleEntry").on("click", evt => {
-    if (evt.target.classList.contains("entry__delete")) {
-        const id = parseInt(evt.target.id.split("--")[1])
-        DataManager.deleteArticle(id).then(listEntries)
-    }
-})
 // Event listener for saving the article into the database
-$("#articleForm").on("click", "#saveArticle", () => {
-    console.log("please work")
+$("#articleForm").on("click", "#saveArticle", event => {
     const newArticle = {
         title: $("#articleTitle").val(),
         content: $("#articleContent").val(),
-        date: Date.now()
+        date: $("#articleDate").val(),
+        URL: $("#articleURL").val(),
     }
-    // Post entries into the to API
+
     DataManager.saveArticleEntry(newArticle).then(() => {
         ArticleForm.clearForm()
+
+        $("#articleEntry").html("")
         listArticles()
     })
 })
+
+// Handle delete button clicks
+$("#articleEntry").on("click", evt => {
+    if (evt.target.classList.contains("article__delete")) {
+        const id = parseInt(evt.target.id.split("--")[1])
+        DataManager.deleteArticle(id)
+            .then(() => {
+                $("#articleEntry").empty()
+                listArticles()
+            })
+    }
+})
+
+// !!! End of Article Stuff !!!
 
 $("#eventForm").on("click", "#saveEventButton", event => { //puts click event on save event button
     const newEvent = { //creates event to be pushed to DB
@@ -114,5 +114,6 @@ $("#eventList").on("click", evt => { //bubbles click event to event list ID
             .then(() => {
                 listEvents() //rerenders event list
             }
-        )}
+            )
+    }
 })

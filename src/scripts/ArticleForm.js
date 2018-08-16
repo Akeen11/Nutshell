@@ -1,38 +1,36 @@
 const $ = require("jquery")
-// creating the html representation of the article form.
-// function for the Article Form
+
 const ArticleForm = Object.create(null, {
-    // clearing the form once you have entered the information and posted it
     clearForm: {
         value: () => {
             $("#articleTitle").val("")
             $("#articleContent").val("")
+            $("#eventDate").val("")
         }
     },
-    // rendering the html respresentation of the article 
     renderArticleForm: {
         value: () => {
             return `
-                <section class="titleField">
+                <h2>Articles</h2>
+                <fieldset class="titleField">
                     <label for="articleTitle">Article Title:</label>
                     <p></p>
-                    <input required type="text" id="articleTitle" placeholder="Article Title">
-                </section>
+                    <input required type="text" id="articleTitle" placeholder="Article Title" size="35">
+                </fieldset>
                     <p></p>
-                <section>
-                    <label for="eventDate">Article Date:</label>
-                    <p></p>
-                    <input required type="date" id="eventDate">
-                 </section>
-                <section class="contentField">
+                <fieldset>
+                    <label for="articleDate">Article Date:</label>
+                    <input required type="date" id="articleDate">
+                    <label for="articleURL">Article URL:</label>
+                    <input required type="text" id="articleURL" placeholder="Article URL">
+                </fieldset>
+                <fieldset class="contentField">
                 <p><p/>
                     <label for="articleContent">Article Content:</label>
                     <p></p>
-                    <textarea id="articleContent" 
-                    placeholder="Article Content Goes Here!" 
-                    rows="5">
-                    </textarea>
-                </section>
+                    <textarea id="articleContent" placeholder="Article Content Goes Here!" rows="5" cols="70"></textarea>
+                </fieldset>
+                <p></p>
                 <button id="saveArticle">Post Article</button>
             `
         }

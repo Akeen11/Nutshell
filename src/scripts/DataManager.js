@@ -18,6 +18,11 @@ const APIManager = Object.create(null, {
             return fetch("http://localhost:8088/users").then(r => r.json())
         }
     },
+    getAllArticles: {
+        value: () => {
+            return fetch("http://localhost:8088/articles?_order=desc&_sort=date").then(r => r.json())
+        }
+    },
     // getting articles
     saveArticleEntry: {
         value: (article) => {
@@ -31,21 +36,15 @@ const APIManager = Object.create(null, {
                 .then(response => response.json())
         }
     },
-    getAllArticles: {
-        value: () => {
-            return fetch("http://localhost:8088/articles?_order=desc&_sort=date").then(r => r.json())
-        }
-    },
-    // deleting an article. Targetting articleId
+    // deleting an article. Targetting Id
     deleteArticle: {
         value: (id) => {
             return fetch(`http://localhost:8088/articles/${id}`, {
                 method: "DELETE"
             })
-                .then(response => response.json())
+                .then(r => r.json())
         }
     },
-
     getAllEvents: {
         value: () => {
             return fetch("http://localhost:8088/events").then(r => r.json())
