@@ -1,6 +1,6 @@
 
 const $ = require("jquery")
-
+//new constant task Form Manager equals the object created--
 const taskFormManager = Object.create(null, {
     clearForm: {
         value: () => {
@@ -14,20 +14,19 @@ const taskFormManager = Object.create(null, {
             return `
             <div class="border">
                 <fieldset>
-                    <label for="taskTitle">Task</label>
-                    <input required type="text" id="taskName">
-                </fieldset>
-                <fieldset>
+                    <label for="taskName">Task</label>
+                    <input required type="text" id="taskName"
+
+
                     <label for="taskDescription">task Instructions</label>
                     <textarea id="taskDescription"></textarea>
-                </fieldset>
-                <fieldset>
+
+
                 <label for="#taskCompletionDate">Completion Date:</label>
                 <input required type="date" id="taskCompletionDate">
-                </fieldset>
+            
                 <button id="savetasktButton">Save Task</button>
-                <fieldset><input type="button" value="completed">
-                <input type="checkbox"></fieldset>
+                </fieldset>
 
             </div>
             `

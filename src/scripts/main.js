@@ -6,6 +6,7 @@ const DataManager = require("./DataManager")
 const LoginFormManager = require("./login")
 const EventFormManager = require("./EventForm")
 const taskFormManager = require("./taskform")
+const listOfTasks = require("./tasklist")
 const listEvents = require("./EventList")
 const $ = require("jquery")
 
@@ -73,22 +74,6 @@ $("#eventForm").on("click", "#saveEventButton", event => { //puts click event on
         listEvents() //renders event list to DOM
     })
 })
-$("#taskForm").on("click", "#savetasktButton", task => {
-    const newTask = {
-        userID:
-        parseInt(JSON.parse(sessionStorage.getItem("activeUser")).id), //grabs id from active user in session storage
-    name: $("#taskName").val(),
-        description: $("#taskDescription").val(),
-            date: $("#taskCompletionDate").val(),
-
-    }
-},
-
-
-DataManager.saveTask(newTask).then(() => {
-    taskFormManager.clearForm()
-})
-)
 
 $("#eventList").on("click", evt => { //bubbles click event to event list ID
     if (evt.target.classList.contains("event__delete")) { //places click event on delete event button
@@ -100,5 +85,39 @@ $("#eventList").on("click", evt => { //bubbles click event to event list ID
             .then(() => {
                 listEvents() //rerenders event list
             }
-        )}
+            )
+    }
 })
+//parseINT keeps there from being issues later with numbers. session storage gets the item active user
+
+//takes id taskForm--jquery The .on() method attaches event handlers-here "click" to the save task button//
+$("#taskForm").on("click", "#savetasktButton", task => {
+    const userObject = parseInt(JSON.parse(sessionStorage.getItem("activeUser"))) //grabs id from active user in session storage
+    const newTask = {
+        userId: userObject.id,
+        userName: userObject.name,
+        name: $("#taskName").val(),
+        description: $("#taskDescription").val(),
+        date: $("#taskCompletionDate").val(),
+    }
+
+    DataManager.saveTask(newTask).then(() => {
+        taskFormManager.clearForm()
+
+        $("#taskList").html("") //clears page before rerendering list from DB
+        listTasks() //renders event list to DOM
+    })
+})
+$("#taskList").on("click", evt => { //bubbles click event to task list ID
+    if (evt.target.classList.contains("task__delete")) { //places click event on delete task button
+        const id = parseInt(evt.target.id.split("--")[1])
+        DataManager.deleteTask(id) //calls delete function
+            .then(() => {
+                $("#taskList").empty()
+                listTasks()
+
+
+            })
+    }
+})
+
