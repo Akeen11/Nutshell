@@ -2,6 +2,7 @@ const DataManager = require("./DataManager")
 const LoginFormManager = require("./login")
 const EventFormManager = require("./EventForm")
 const taskFormManager = require("./taskform")
+const taskList = require("./tasklist")
 const listEvents = require("./EventList")
 const $ = require("jquery")
 
