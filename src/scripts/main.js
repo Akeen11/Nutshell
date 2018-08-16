@@ -1,16 +1,13 @@
 console.log("Welcome to Browserify")
 //const $=require("jquery")
-const DataManager=require("./DataManager")
-const userList=require("./Userlist")
+const DataManager = require("./DataManager")
+const userList = require("./Userlist")
 const LoginFormManager = require("./login")
 const EventFormManager = require("./EventForm")
-<<<<<<< HEAD
 const MessageFormManager = require("./BuildMessage")
 const messageComponent = require("./message")
 
-=======
 const listEvents = require("./EventList")
->>>>>>> master
 const $ = require("jquery")
 
 $("#loginForm").html(LoginFormManager.renderLoginForm()) //renders login form to DOM
@@ -22,20 +19,17 @@ $("#loginForm").on("click", "#LoginButton", event => {
         })
 
         if (user) {
-<<<<<<< HEAD
             sessionStorage.setItem("activeUser", JSON.stringify(user))
             LoginFormManager.clearForm()
             //WORKING
             $("#loginForm").hide()
             //WORKING
             $("#messages").html(MessageFormManager.renderMessageForm()).show()
-           $("#eventForm").html(EventFormManager.renderEventForm()).show()
-=======
+            $("#eventForm").html(EventFormManager.renderEventForm()).show()
             sessionStorage.setItem("activeUser", JSON.stringify(user)) //sets active user to session storage
             LoginFormManager.clearForm() //clears form after button click
 
             $("#loginForm").hide() //hides login form after user login
->>>>>>> master
 
             $("#eventForm").html(EventFormManager.renderEventForm()).show() //writes eventform to DOM after login form is hidden
             listEvents() //writes eventlist to DOM
@@ -64,40 +58,37 @@ $("#create").on("click", event => {
         })
 })
 
-<<<<<<< HEAD
 
-$("#messages").on("click","#message-btn", event => {
+$("#messages").on("click", "#message-btn", event => {
     let user = JSON.parse(sessionStorage.getItem("activeUser"))
     const newMessage = {
-    Message:$("#message-input").val(),
-    userId: user.id,
-    userName: user.name
+        Message: $("#message-input").val(),
+        userId: user.id,
+        userName: user.name
     }
     console.log(newMessage)
     DataManager.saveMessage(newMessage).then(() => {
         MessageFormManager.clearForm()
-})
+    })
 })
 
 $("#eventForm").on("click", "#saveEventButton", event => {
     const newEvent = {
-=======
-$("#eventForm").on("click", "#saveEventButton", event => { //puts click event on save event button
-    const newEvent = { //creates event to be pushed to DB
-        userId: parseInt(JSON.parse(sessionStorage.getItem("activeUser")).id), //grabs id from active user in session storage
->>>>>>> master
-        name: $("#eventTitle").val(),
-        location: $("#eventContent").val(),
-        date: $("#eventDate").val(),
-    }
+        $("#eventForm").on("click", "#saveEventButton", event => { //puts click event on save event button
+        const newEvent = { //creates event to be pushed to DB
+            userId: parseInt(JSON.parse(sessionStorage.getItem("activeUser")).id), //grabs id from active user in session storage
+            name: $("#eventTitle").val(),
+            location: $("#eventContent").val(),
+            date: $("#eventDate").val(),
+        }
 
-    DataManager.saveEvent(newEvent).then(() => {
-        EventFormManager.clearForm()
+        DataManager.saveEvent(newEvent).then(() => {
+            EventFormManager.clearForm()
 
-        $("eventList").html("") //clears page before rerendering list from DB
-        listEvents() //renders event list to DOM
+            $("eventList").html("") //clears page before rerendering list from DB
+            listEvents() //renders event list to DOM
+        })
     })
-})
 
 $("#eventList").on("click", evt => { //bubbles click event to event list ID
     if (evt.target.classList.contains("event__delete")) { //places click event on delete event button
@@ -109,5 +100,6 @@ $("#eventList").on("click", evt => { //bubbles click event to event list ID
             .then(() => {
                 listEvents() //rerenders event list
             }
-        )}
+            )
+    }
 })
