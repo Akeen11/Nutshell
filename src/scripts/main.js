@@ -1,6 +1,11 @@
+console.log("Welcome to Browserify")
+//const $=require("jquery")
 const DataManager = require("./DataManager")
+
+
 const LoginFormManager = require("./login")
 const EventFormManager = require("./EventForm")
+const taskFormManager = require("./taskform")
 const listEvents = require("./EventList")
 const $ = require("jquery")
 
@@ -13,6 +18,14 @@ $("#loginForm").on("click", "#LoginButton", event => {
         })
 
         if (user) {
+            sessionStorage.setItem("activeUser", JSON.stringify(user))
+            LoginFormManager.clearForm()
+            //WORKING
+            $("#loginForm").hide()
+            //WORKING
+            $("#eventForm").html(EventFormManager.renderEventForm()).show()
+            $("#taskForm").html(taskFormManager.renderTaskForm()).show()
+
             sessionStorage.setItem("activeUser", JSON.stringify(user)) //sets active user to session storage
             LoginFormManager.clearForm() //clears form after button click
 
@@ -60,6 +73,22 @@ $("#eventForm").on("click", "#saveEventButton", event => { //puts click event on
         listEvents() //renders event list to DOM
     })
 })
+$("#taskForm").on("click", "#savetasktButton", task => {
+    const newTask = {
+        userID:
+        parseInt(JSON.parse(sessionStorage.getItem("activeUser")).id), //grabs id from active user in session storage
+    name: $("#taskName").val(),
+        description: $("#taskDescription").val(),
+            date: $("#taskCompletionDate").val(),
+
+    }
+},
+
+
+DataManager.saveTask(newTask).then(() => {
+    taskFormManager.clearForm()
+})
+)
 
 $("#eventList").on("click", evt => { //bubbles click event to event list ID
     if (evt.target.classList.contains("event__delete")) { //places click event on delete event button
