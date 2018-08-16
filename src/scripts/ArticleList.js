@@ -4,15 +4,18 @@ const $ = require("jquery")
 const articleComponent = require("./ArticleEntry")
 
 // targetting "#articleEntry" in index.html using jQuery.
-const articleEntry = $("#articleEntry")
+const articleDOM = $("#articleEntry")
 
 // creating a function to populate article entries on the page.
 const articleEntryList = (entries) => {
-    articleEntry.innerHTML = ""
+    console.log("articleEntry", articleDOM)
+    let newDOM = ""
     // using .map to provide 
     entries.map(entry => {
-        articleEntry.innerHTML += articleComponent(entry)
+        newDOM += articleComponent(entry)
     })
+    articleDOM.html(newDOM)
+    console.log(articleDOM)
 }
 
 // exporting so articleEntryList may be used by another module

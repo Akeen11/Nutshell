@@ -18,26 +18,17 @@ const APIManager = Object.create(null, {
             return fetch("http://localhost:8088/users").then(r => r.json())
         }
     },
-    // potential "delete user" feature that may or may not be implemented
-    deleteUser: {
-        value: (id) => {
-            return fetch(`http://localhost:8088/users/${id}`, {
-                method: "DELETE"
-            })
-                .then(r => r.json())
-        }
-    },
     // getting articles
     saveArticleEntry: {
         value: (article) => {
-            return fetch ("http://localhost:8088/articles", {
+            return fetch("http://localhost:8088/articles", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(article)
             })
-            .then(response => response.json())
+                .then(response => response.json())
         }
     },
     getAllArticles: {
@@ -48,12 +39,41 @@ const APIManager = Object.create(null, {
     // deleting an article. Targetting articleId
     deleteArticle: {
         value: (id) => {
-            return fetch (`http://localhost:8088/articles/${id}`, {
+            return fetch(`http://localhost:8088/articles/${id}`, {
                 method: "DELETE"
             })
-            .then(response => response.json())
+                .then(response => response.json())
         }
-    }
+    },
+
+    getAllEvents: {
+        value: () => {
+            return fetch("http://localhost:8088/events").then(r => r.json())
+        }
+    },
+
+    saveEvent: {
+        value: (event) => {
+            return fetch("http://localhost:8088/events", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(article)
+            })
+                .then(response => response.json())
+        }
+    },
+
+    deleteEvent: {
+        value: (id) => {
+            return fetch(`http://localhost:8088/events/${id}`, {
+                method: "DELETE"
+            })
+                .then(r => r.json())
+        },
+    },
 })
+
 
 module.exports = APIManager
