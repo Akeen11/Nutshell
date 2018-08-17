@@ -3,9 +3,9 @@ const LoginFormManager = require("./login")
 const ArticleForm = require("./ArticleForm")
 const listArticles = require("./ArticleList")
 const EventFormManager = require("./EventForm")
+const listEvents = require("./EventList")
 const taskFormManager = require("./taskform")
 const listTasks = require("./tasklist")
-const listEvents = require("./EventList")
 const $ = require("jquery")
 
 
@@ -37,6 +37,17 @@ $("#loginForm").on("click", "#LoginButton", event => {
             //writes eventform to DOM after login form is hidden
             $("#taskForm").html(taskFormManager.renderTaskForm()).show() //writes eventlist to DOM
             listTasks()
+
+            $("#eventForm").on("click", "#logoutButton", event => {
+                sessionStorage.removeItem("activeUser")
+                $("#eventForm").html("")
+                $("#eventList").html("")
+                $("#taskForm").html("")
+                $("#taskList").html("")
+                $("#articleForm").html("")
+                $("#articleList").html("")
+                $("#loginForm").html(LoginFormManager.renderLoginForm()).show()
+            })
         } else {
             LoginFormManager.clearForm()
             alert("You need to register")
@@ -119,12 +130,9 @@ $("#eventList").on("click", evt => { //bubbles click event to event list ID
         const id = parseInt(evt.target.id.split("--")[1]) //splits and specifies specific button id's
         DataManager.deleteEvent(id) //calls delete function
             .then(() => {
-                $("eventList").empty() //clears div before rerendering event list
-            })
-            .then(() => {
+                $("#eventList").empty() //clears div before rerendering event list
                 listEvents() //rerenders event list
-            }
-            )
+            })
     }
 })
 //parseINT keeps there from being issues later with numbers. session storage gets the item active user
@@ -174,14 +182,14 @@ $("#taskList").on("click", evt => { //bubbles click event to task list ID
             })
     }
 })
+
 let editMode = false
-$("#taskList").on("click", evt => { //bubbles click event to task list ID
-    if (evt.target.classList.contains("editTask") && editMode === false) { //places click event on edit task button
+$("#taskList").on("click", evt => { 
+    if (evt.target.classList.contains("editTask") && editMode === false) { 
         const id = parseInt(evt.target.id.split("--")[1])
 
         const element = document.getElementById(`taskNameField--${id}`)
         const taskName = element.innerHTML
-        console.log(taskName);
         element.innerHTML = `<input id="newestTask" type="text" value="${taskName}">`
 
         editMode = true
@@ -191,7 +199,7 @@ $("#taskList").on("click", evt => { //bubbles click event to task list ID
             name: document.getElementById("newestTask").value
         }
         const id = parseInt(evt.target.id.split("--")[1])
-        DataManager.editedTasks(id, editedTaskName) //calls delete function
+        DataManager.editedTasks(id, editedTaskName) 
             .then(() => {
                 $("#taskList").empty()
                 editMode = false
@@ -199,5 +207,34 @@ $("#taskList").on("click", evt => { //bubbles click event to task list ID
 
             })
     }
+})
 
+$("#eventList").on("click", evt => {
+    if (evt.target.classList.contains("event__edit") && editMode === false) {
+        const id = parseInt(evt.target.id.split("--")[1])
+
+        const element = document.getElementById(`eventField--${id}`)
+        const name = element.innerHTML
+        element.innerHTML = `
+        <input id="newestEventName" type="text" value="${name}">
+        `
+
+        editMode = true
+
+    } else if (evt.target.classList.contains("event__edit") && editMode === true) {
+        const userObject = JSON.parse(sessionStorage.getItem("activeUser"))
+        const updatedEvent = {
+            userId: userObject.id,
+            userName: userObject.name,
+            name: document.getElementById("newestEventName").value,
+        }
+        const id = parseInt(evt.target.id.split("--")[1])
+        DataManager.editEvent(id, updatedEvent) 
+            .then(() => {
+                $("#eventList").empty()
+                editMode = false
+                listEvents()
+
+            })
+    }
 })
