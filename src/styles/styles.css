@@ -1,26 +1,72 @@
-
 html, body {
     height: 100%;
+    margin-left: auto;
+}
+
+body {
+    background-image: url(PeopleWorking3.jpg);
+    background-color: #eff9f9;
+    font-family: "futura-pt", sans-serif;
+}
+
+header {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 3em;
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(0%);
+    color: white;
+    background-color: dodgerblue;
+    float: top;
+    width: 100%;
+    height: 70px;
 }
 
 img {
-    width: 5%;
+    width: 7%;
     height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 1em;
+}
+
+#loginForm {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    padding: 2em;
+    border: 3px dodgerblue solid;
 }
 
 .LoginButton, #create {
     background-color: dodgerblue;
     color: white;
-    font-size: 0.7em;
-}
-
-.copyright {
-    justify-content: center;
+    font-size: 1em;
 }
 
 footer {
-    background-color: dodgerblue;
-    position: relative;
-    height: 100px;
-    margin-top: -100px;
+    text-align: center;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0%;
+    width: 100%;
+    height: 4em;
+    background: dodgerblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
 }
