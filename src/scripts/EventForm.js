@@ -11,7 +11,6 @@ const FormManager = Object.create(null, {
     renderEventForm: {
         value: () => {
             return `
-            <button id="logoutButton" style="background-color: red; color: white; position: absolute; right: 0px; margin: 12px">Logout</button>
             <h2>Events</h2>
             <div>
                     <label for="eventTitle">Title:</label>

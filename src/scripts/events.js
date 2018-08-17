@@ -1,6 +1,6 @@
 const createEvent = (name, location, date, id, userName) => {
     return `
-    <fieldset>
+    <article>
         <section>
             ${userName}
         </section>

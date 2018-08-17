@@ -8,9 +8,8 @@ const taskFormManager = require("./taskform")
 const listTasks = require("./tasklist")
 const $ = require("jquery")
 
-
 $("#loginForm").html(LoginFormManager.renderLoginForm()) //renders login form to DOM
-
+$("#logoutButton").hide();
 $("#loginForm").on("click", "#LoginButton", event => {
     DataManager.getAllUsers().then((users) => {
         const user = users.find(user => {
@@ -26,6 +25,10 @@ $("#loginForm").on("click", "#LoginButton", event => {
             $("#eventForm").html(EventFormManager.renderEventForm()).show()
             $("#taskForm").html(taskFormManager.renderTaskForm()).show()
             $("#articleForm").html(ArticleForm.renderArticleForm()).show()
+            $("#logo").hide();
+            $("#footer").css("position", "relative");
+            $("header").css("position", "relative");
+            $("#logoutButton").show();
 
             sessionStorage.setItem("activeUser", JSON.stringify(user)) //sets active user to session storage
             LoginFormManager.clearForm() //clears form after button click
@@ -38,7 +41,7 @@ $("#loginForm").on("click", "#LoginButton", event => {
             $("#taskForm").html(taskFormManager.renderTaskForm()).show() //writes eventlist to DOM
             listTasks()
 
-            $("#eventForm").on("click", "#logoutButton", event => {
+            $(".header-container").on("click", "#logoutButton", event => {
                 sessionStorage.removeItem("activeUser")
                 $("#eventForm").html("")
                 $("#eventList").html("")
@@ -47,6 +50,8 @@ $("#loginForm").on("click", "#LoginButton", event => {
                 $("#articleForm").html("")
                 $("#articleList").html("")
                 $("#loginForm").html(LoginFormManager.renderLoginForm()).show()
+                $("#footer").css("position", "absolute");
+                $("#logoutButton").hide();
             })
         } else {
             LoginFormManager.clearForm()
