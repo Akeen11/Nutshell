@@ -108,10 +108,23 @@ const APIManager = Object.create(null, {
             })
                 .then(response => response.json())
         }
+    },
+
+
+editedTasks: {
+    value: (id,task) => {
+        return fetch(`http://localhost:8088/tasks/${id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(task)
+        })
+            .then(response => response.json())
     }
+}
 
 })
-
 
 //use put method pass two values (id,tasks) use post and delete method functions to do this
 
