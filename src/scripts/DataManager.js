@@ -47,7 +47,7 @@ const APIManager = Object.create(null, {
     },
     getAllEvents: {
         value: () => {
-            return fetch("http://localhost:8088/events").then(r => r.json())
+            return fetch("http://localhost:8088/events?_order=desc&_sort=date").then(r => r.json())
         }
     },
 
@@ -63,6 +63,19 @@ const APIManager = Object.create(null, {
                 .then(response => response.json())
         }
     },
+
+    editEvent: {
+        value: (id, event) => {
+            return fetch(`http://localhost:8088/events/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(event)
+            })
+                .then(r => r.json())
+        },
+    },  
 
     deleteEvent: {
         value: (id) => {
@@ -81,7 +94,7 @@ const APIManager = Object.create(null, {
                 },
                 body: JSON.stringify(tasks)
             })
-            .then(response => response.json())
+                .then(response => response.json())
         }
     },
     getAllTasks: {
@@ -94,26 +107,9 @@ const APIManager = Object.create(null, {
             return fetch(`http://localhost:8088/tasks/${id}`, {
                 method: "DELETE"
             })
-            .then(r => r.json())
+                .then(r => r.json())
         }
     },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 })
 
 

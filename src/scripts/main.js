@@ -3,9 +3,9 @@ const LoginFormManager = require("./login")
 const ArticleForm = require("./ArticleForm")
 const listArticles = require("./ArticleList")
 const EventFormManager = require("./EventForm")
+const listEvents = require("./EventList")
 const taskFormManager = require("./taskform")
 const listTasks = require("./tasklist")
-const listEvents = require("./EventList")
 const $ = require("jquery")
 
 
@@ -131,12 +131,9 @@ $("#eventList").on("click", evt => { //bubbles click event to event list ID
         const id = parseInt(evt.target.id.split("--")[1]) //splits and specifies specific button id's
         DataManager.deleteEvent(id) //calls delete function
             .then(() => {
-                $("eventList").empty() //clears div before rerendering event list
-            })
-            .then(() => {
+                $("#eventList").empty() //clears div before rerendering event list
                 listEvents() //rerenders event list
-            }
-            )
+            })
     }
 })
 //parseINT keeps there from being issues later with numbers. session storage gets the item active user
@@ -172,3 +169,30 @@ $("#taskList").on("click", evt => { //bubbles click event to task list ID
     }
 })
 
+$("#eventList").on("click", evt => { 
+    console.log("y u no work")
+    if (evt.target.classList.contains("event__edit")&&editMode===false) { 
+        const id = parseInt(evt.target.id.split("--")[1])
+
+        const element = $("#eventField--${id}")
+        const eventName = element.innerHTML
+        element.innerHTML = `
+        <input id="newestEvent" type="text" value="${eventName}">
+        `
+
+        editMode=true
+
+     }else if(evt.target.classList.contains("event__edit")&&editMode===true){
+            let editedEventName = {
+                name: $("#newestEvent").value
+            }
+            const id = parseInt(evt.target.id.split("--")[1])
+            DataManager.editedEvents(id, editedEventName) //calls delete function
+            .then(() => {
+                $("#eventList").empty()
+                editMode=false
+                listEvents()
+
+            })
+     }}
+)

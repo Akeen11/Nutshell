@@ -24,8 +24,8 @@ const LoginFormManager = Object.create(null, {
                     <label for="email">Email Address:</label>
                     <input required type="text" id="email" placeholder="email address">
                     </article>
-
                     <button id="LoginButton" class="LoginButton">Login</button>
+                    
                     <h2>Create Account</h2>
                     <article class="nameField">
                     <label for="createName">Username:</label>
@@ -35,8 +35,7 @@ const LoginFormManager = Object.create(null, {
                     <label for="createUser">Email Address:</label>
                     <input required type="text" id="emailTitle" placeholder="email address">
                     </article>
-
-                <button id="create">Create Account</button>
+                    <button id="create">Create Account</button>
                 `
         }
     },
