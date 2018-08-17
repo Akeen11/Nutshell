@@ -45,7 +45,7 @@ const APIManager = Object.create(null, {
                 .then(r => r.json())
         }
     },
-    getMassage: {
+    getMessage: {
         value: () => {
             return fetch("http://localhost:8088/Message")
                 .then(res => res.json())
@@ -64,10 +64,14 @@ const APIManager = Object.create(null, {
                 .then(res => res.json())
         }
     },
-    putMessage: {
-        value: (id) => {
+    patchMessage: {
+        value: (id,message) => {
             return fetch(`http://localhost:8088/Message/${id}`, {
-                method: "PUT",
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(message)
 
             })
                 .then(res => res.json())

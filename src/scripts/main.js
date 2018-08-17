@@ -9,6 +9,7 @@ const EventFormManager = require("./EventForm")
 const MessageFormManager = require("./BuildMessage")
 const messageComponent = require("./message")
 const listMessage = require("./MessageList")
+//const scrollBottom = require("./scrollBottom")
 const taskFormManager = require("./taskform")
 const listTasks = require("./tasklist")
 const listEvents = require("./EventList")
@@ -40,7 +41,7 @@ $("#loginForm").on("click", "#LoginButton", event => {
 
             // $("#eventForm").html(EventFormManager.renderEventForm()).show() //writes eventform to DOM after login form is hidden
 
-            listEvents() 
+            listEvents()
             listArticles()
             listTasks()
             listMessage()
@@ -54,7 +55,7 @@ $("#loginForm").on("click", "#LoginButton", event => {
                 $("#articleEntry").html("")
                 $("#eventForm").html("")
                 $("#eventList").html("")
-                $("#message").html("")
+                $("#messages").html("")
                 $("#messageList").html("")
                 $("#loginForm").html(LoginFormManager.renderLoginForm()).show()
             })
@@ -91,15 +92,16 @@ $("#messages").on("click", "#message-btn", event => {
         userId: user.id,
         userName: user.name
     }
-    console.log(newMessage)
+    //console.log(newMessage)
     DataManager.saveMessage(newMessage).then(() => {
         MessageFormManager.clearForm()
         $("#messageList").html("") //clears page before rerendering list from DB
         listMessage()
+    })
+
 })
-})
-$("#messageList").on("click", evt => { //bubbles click event to event list ID
-    if (evt.target.classList.contains("message__delete")) { //places click event on delete event button
+$("#messageList").on("click", evt => { //bubbles message event to messaget list ID
+    if (evt.target.classList.contains("message__delete")) { //places click message on delete event button
         const id = parseInt(evt.target.id.split("--")[1]) //splits and specifies specific button id's
         DataManager.deleteMessage(id) //calls delete function
             // .then(() => {
@@ -111,10 +113,42 @@ $("#messageList").on("click", evt => { //bubbles click event to event list ID
             )
     }
 })
+let editMode = false
+$("#messageList").on("click", evt => { //bubbles click event to event list ID
+    console.log(evt.target)
+    if (evt.target.classList.contains("message_edit") && editMode === false) {
+        //places click event on edit message button
+    
+        const id = parseInt(evt.target.id.split("--")[1])
+        const element = document.getElementById(`messageField--${id}`)
 
-$("#eventForm").on("click", "#saveEventButton", event => {
-    // const newEvent = {
-    //     $("#eventForm").on("click", "#saveEventButton", event => {//puts click event on save event button
+
+        const msgName = element.innerHTML
+        console.log(msgName)
+        element.innerHTML = `<input id="newestMessage" type="text" value="${msgName}">`
+
+        editMode = true
+    }
+    else if (evt.target.classList.contains("message_edit") && editMode === true) {
+        let editedMsgName = {
+            message: document.getElementById("newestMessage").value
+        }
+        const id = parseInt(evt.target.id.split("--")[1])
+        DataManager.patchMessage(id, editedMsgName) //calls edit function
+            .then(() => {
+                $("#messageList").empty()
+                editMode = false
+                listMessage()
+
+
+            })
+        }
+    })
+
+
+    $("#eventForm").on("click", "#saveEventButton", event => {
+        // const newEvent = {
+        //     $("#eventForm").on("click", "#saveEventButton", event => {//puts click event on save event button
         const newEvent = { //creates event to be pushed to DB
             userId: parseInt(JSON.parse(sessionStorage.getItem("activeUser")).id), //grabs id from active user in session storage
             name: $("#eventTitle").val(),
@@ -131,49 +165,48 @@ $("#eventForm").on("click", "#saveEventButton", event => {
     })
 
 
-$("#eventList").on("click", evt => { //bubbles click event to event list ID
-    if (evt.target.classList.contains("event__delete")) { //places click event on delete event button
-        const id = parseInt(evt.target.id.split("--")[1]) //splits and specifies specific button id's
-        DataManager.deleteEvent(id) //calls delete function
-            .then(() => {
-                $("eventList").empty() //clears div before rerendering event list
-            })
-            .then(() => {
-                listEvents() //rerenders event list
-            }
-            )
-    }
-})
-//parseINT keeps there from being issues later with numbers. session storage gets the item active user
-
-//takes id taskForm--jquery The .on() method attaches event handlers-here "click" to the save task button//
-$("#taskForm").on("click", "#savetasktButton", task => {
-    const userObject = parseInt(JSON.parse(sessionStorage.getItem("activeUser"))) //grabs id from active user in session storage
-    const newTask = {
-        userId: userObject.id,
-        userName: userObject.name,
-        name: $("#taskName").val(),
-        description: $("#taskDescription").val(),
-        date: $("#taskCompletionDate").val(),
-    }
-
-    DataManager.saveTask(newTask).then(() => {
-        taskFormManager.clearForm()
-
-        $("#taskList").html("") //clears page before rerendering list from DB
-        listTasks() //renders event list to DOM
+    $("#eventList").on("click", evt => { //bubbles click event to event list ID
+        if (evt.target.classList.contains("event__delete")) { //places click event on delete event button
+            const id = parseInt(evt.target.id.split("--")[1]) //splits and specifies specific button id's
+            DataManager.deleteEvent(id) //calls delete function
+                .then(() => {
+                    $("eventList").empty() //clears div before rerendering event list
+                })
+                .then(() => {
+                    listEvents() //rerenders event list
+                }
+                )
+        }
     })
-})
-$("#taskList").on("click", evt => { //bubbles click event to task list ID
-    if (evt.target.classList.contains("task__delete")) { //places click event on delete task button
-        const id = parseInt(evt.target.id.split("--")[1])
-        DataManager.deleteTask(id) //calls delete function
-            .then(() => {
-                $("#taskList").empty()
-                listTasks()
+    //parseINT keeps there from being issues later with numbers. session storage gets the item active user
+
+    //takes id taskForm--jquery The .on() method attaches event handlers-here "click" to the save task button//
+    $("#taskForm").on("click", "#savetasktButton", task => {
+        const userObject = parseInt(JSON.parse(sessionStorage.getItem("activeUser"))) //grabs id from active user in session storage
+        const newTask = {
+            userId: userObject.id,
+            userName: userObject.name,
+            name: $("#taskName").val(),
+            description: $("#taskDescription").val(),
+            date: $("#taskCompletionDate").val(),
+        }
+
+        DataManager.saveTask(newTask).then(() => {
+            taskFormManager.clearForm()
+
+            $("#taskList").html("") //clears page before rerendering list from DB
+            listTasks() //renders event list to DOM
+        })
+    })
+    $("#taskList").on("click", evt => { //bubbles click event to task list ID
+        if (evt.target.classList.contains("task__delete")) { //places click event on delete task button
+            const id = parseInt(evt.target.id.split("--")[1])
+            DataManager.deleteTask(id) //calls delete function
+                .then(() => {
+                    $("#taskList").empty()
+                    listTasks()
 
 
-            })
-    }
-})
-
+                })
+        }
+    })

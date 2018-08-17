@@ -1,0 +1,26 @@
+#message-container{
+    padding:20px;
+    background-color:gray;
+    
+    border-bottom: solid orange;
+}
+#Welcome{
+    color:orange;
+    font-size:30px;
+}
+#message-input {
+    width: 100%;
+    padding: 18px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+#message-btn{
+    
+}
+/*#message-header{
+    color:rgb(99, 29, 29);
+}
+background-color:gray;
+#message-fieldset{
+
+}*/

@@ -1,19 +1,18 @@
-const createMessage =  (userId ,name, message, id)=>{
+const createMessage =  (userId, name, message, id)=>{
     return`
-    <div class="entry">
+    <div id="messageDiv"class="entry">
+    <article id="message-Article"
     <fieldset>
-    <header class="entry__header">
-        <h3>${userId}</h3>
-    </header>
+    
     <div id="entry_name">
-    <h3>${name}</h3>
-    <article class="entry__content">
-       <p>:${message}</p>
-    </article>
+    <h4 id="messageField--${id}">${name}: ${message}</h4>
+    </div>
     <button class="message__delete" id="deleteMessage--${id}">Delete Meassage</button>
     <button class="message_edit" id="editMessage--${id}">Edit Message</button>
-    </fieldset>
+    </article>
     </div>
+    </fieldset>
+
     `
 }
 module.exports=createMessage

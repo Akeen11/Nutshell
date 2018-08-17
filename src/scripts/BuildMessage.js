@@ -14,10 +14,9 @@ const MeassageFormManager  = Object.create(null, {
      console.log("Messeges")
      return`
      
-     <div>
-     <fieldset>
-     <legend> Welcome:</legend>
-     <h2 id="message-header"> Start Chatting </h2>
+     <div id="message-container">
+    
+     <legend id="Welcome"> Welcome to the Nutshell's chat room</legend>
      <article id="message-article>
      <section id="message-section">
      <div id="message-box">
@@ -26,7 +25,7 @@ const MeassageFormManager  = Object.create(null, {
      </div>
      </section>
      </article>
-     </fieldset>
+    
      </div>`
     }
  }
