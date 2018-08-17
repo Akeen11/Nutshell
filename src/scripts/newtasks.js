@@ -1,24 +1,16 @@
-const createNewtask = ( taskName, description,date, id) => {
+const createNewtask = (taskName, description, date, id) => {
     return `
-    <article class="entry boxed">
+    <article class="tasklistBox">
+            <h2 id="taskNameField--${id}">
+            ${taskName}</h2>
+            <button class="editTask" id="editTask--${id}" type="button" class="btn btn-default btn-sm">
+              <span class="glyphicon glyphicon-edit"></span> Edit</button>
 
-        <header>
-
-            <h2>To Do:${taskName}
-            <button type="button" class="btn btn-default btn-sm">
-              <span class="glyphicon glyphicon-edit"></span> Edit
-            </button>
-            </h2>
-
-        </header>
-        <section> Description:
+        <h3> Description:
             ${description}
-
-        </section>
-        <footer>
-            <time> Completion date: ${date} <input type="checkbox" id="completedTasks--${id}" class="task__completed" value="completed">
-           </time>
-        </footer>
+        </h3>
+            <button class="taskcompletebutton"> Completion date: ${date} <input type="checkbox" id="completedTasks--${id}" class="task__completed" value="completed">
+        completed task checkbox </button>
         <button id="deleteTask--${id}" class="task__delete">Delete Task</button>
     </article>
     `

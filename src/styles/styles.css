@@ -1,0 +1,32 @@
+.taskcompletebutton{
+    Padding: 14px;
+    color: green;
+    font-size: medium;
+    font-weight: bold;
+}
+#thistaskName {
+    font-size: medium;
+    font-weight: bold;
+}
+#thisTaskDescription{
+    font-size: medium;
+    font-weight: bold;
+}
+#thistaskCompletionDate {
+    font-size: medium;
+    font-weight: bold;
+}
+#taskFieldset{
+    padding: 1em;
+}
+#taskDescription{
+    height: 2cm;
+}
+.tasklistBox{
+    background-color: lightgrey;
+}
+.task__delete{
+    background-color: red;
+}
+#taskFieldset{
+    background-color:#e8eaed; }
