@@ -25,6 +25,8 @@ $("#loginForm").on("click", "#LoginButton", event => {
             $("#eventForm").html(EventFormManager.renderEventForm()).show()
             $("#taskForm").html(taskFormManager.renderTaskForm()).show()
             $("#articleForm").html(ArticleForm.renderArticleForm()).show()
+            $("#logo").hide();
+            $("#footer").css("position", "relative");
 
             sessionStorage.setItem("activeUser", JSON.stringify(user)) //sets active user to session storage
             LoginFormManager.clearForm() //clears form after button click

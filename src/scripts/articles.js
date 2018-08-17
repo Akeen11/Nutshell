@@ -8,7 +8,7 @@
 
 const createArticle = (name, title, date, content, URL, id) => {
     return `
-    <fieldset>
+    <section>
     <section>${name}</section>
             <header class="titleField">
                 <h2>${title}</h2>
@@ -21,7 +21,7 @@ const createArticle = (name, title, date, content, URL, id) => {
             </div>
             <a href="url">${URL}</a>
         </div>
-    </fieldset>
+    </section>
     <p></p>
     <button id="deleteArticleButton--${id}" class="article__delete">Delete Article Entry</button>
     `

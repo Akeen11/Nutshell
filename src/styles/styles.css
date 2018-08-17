@@ -47,7 +47,7 @@ img {
     margin-right: -50%;
     transform: translate(-50%, -50%);
     padding: 2em;
-    border: 3px dodgerblue solid;
+    border: 5px dodgerblue solid;
 }
 
 .LoginButton, #create {
