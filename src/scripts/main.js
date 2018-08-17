@@ -8,7 +8,6 @@ const listTasks = require("./tasklist")
 const listEvents = require("./EventList")
 const $ = require("jquery")
 
-
 $("#loginForm").html(LoginFormManager.renderLoginForm()) //renders login form to DOM
 
 $("#loginForm").on("click", "#LoginButton", event => {

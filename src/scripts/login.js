@@ -37,11 +37,10 @@ const LoginFormManager = Object.create(null, {
                     </article>
 
                 <button id="create">Create Account</button>
+
                 `
         }
     },
-
-
 
 })
 
