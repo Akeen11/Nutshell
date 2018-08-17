@@ -5,7 +5,10 @@ const $ = require("jquery")
 listTasks = () => {
     DataManager.getAllTasks()
         .then(results => {
-            results.forEach(tasks => {
+            let incompleteTasks = results.filter( task =>{
+                return task.completed===false
+            })
+            incompleteTasks.forEach(tasks => {
                 let taskComponent = createTask( tasks.name, tasks.description, tasks.date, tasks.id)
                 writeTasksToDOM(taskComponent)
             })

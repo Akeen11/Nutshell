@@ -89,7 +89,7 @@ const APIManager = Object.create(null, {
 
     getAllEvents: {
         value: () => {
-            return fetch("http://localhost:8088/events").then(r => r.json())
+            return fetch("http://localhost:8088/events?_order=desc&_sort=date").then(r => r.json())
         }
     },
 
@@ -104,6 +104,19 @@ const APIManager = Object.create(null, {
             })
                 .then(response => response.json())
         }
+    },
+
+    editEvent: {
+        value: (id, event) => {
+            return fetch(`http://localhost:8088/events/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(event)
+            })
+                .then(r => r.json())
+        },
     },
 
     deleteEvent: {
@@ -139,24 +152,53 @@ const APIManager = Object.create(null, {
             .then(r => r.json())
         }
     },
+    completedTasks: {
+        value: (id, task) => {
+            return fetch(`http://localhost:8088/tasks/${id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(task)
+            })
+                .then(response => response.json())
+        }
+    },
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    editedTasks: {
+        value: (id, task) => {
+            return fetch(`http://localhost:8088/tasks/${id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(task)
+            })
+                .then(response => response.json())
+        }
+    }
 
 })
+
+//use put method pass two values (id,tasks) use post and delete method functions to do this
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 module.exports = APIManager

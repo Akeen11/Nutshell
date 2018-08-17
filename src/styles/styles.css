@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #message-container{
     padding:20px;
     background-color:gray;
@@ -24,3 +25,125 @@ background-color:gray;
 #message-fieldset{
 
 }*/
+=======
+html, body {
+    height: 100%;
+    margin-left: auto;
+}
+
+body {
+    background-image: url(PeopleWorking3.jpg);
+    background-color: #eff9f9;
+    font-family: "futura-pt", sans-serif;
+}
+
+header {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+}
+
+.header-container {
+    margin: 0;
+    padding: 0;
+    font-size: 3em;
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(0%);
+    color: white;
+    background-color: dodgerblue;
+    float: top;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+}
+
+img {
+    width: 7%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 1em;
+}
+
+#loginForm {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    padding: 2em;
+    border: 5px dodgerblue solid;
+}
+
+.LoginButton, #create {
+    background-color: dodgerblue;
+    color: white;
+    font-size: 1em;
+}
+
+#logoutButton {
+    font-size: .5em;
+}
+
+footer {
+    text-align: center;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0%;
+    width: 100%;
+    height: 4em;
+    background: dodgerblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.header-item-button {
+    align-self: flex-end;
+}
+
+.header-item-h1 {
+    align-self: center;
+    font-size: 1em;
+}
+.taskcompletebutton{
+    Padding: 14px;
+    color: green;
+    font-size: medium;
+    font-weight: bold;
+}
+#thistaskName {
+    font-size: medium;
+    font-weight: bold;
+}
+#thisTaskDescription{
+    font-size: medium;
+    font-weight: bold;
+}
+#thistaskCompletionDate {
+    font-size: medium;
+    font-weight: bold;
+}
+#taskFieldset{
+    padding: 1em;
+}
+#taskDescription{
+    height: 2cm;
+}
+/* .tasklistBox{
+    background-color: lightgrey;
+} */
+.task__delete{
+    background-color: red;
+}
+/* #taskFieldset{
+    background-color:#e8eaed; 
+} */
+>>>>>>> master
