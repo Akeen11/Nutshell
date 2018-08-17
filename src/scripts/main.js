@@ -37,6 +37,17 @@ $("#loginForm").on("click", "#LoginButton", event => {
             //writes eventform to DOM after login form is hidden
             $("#taskForm").html(taskFormManager.renderTaskForm()).show() //writes eventlist to DOM
             listTasks()
+
+            $("#eventForm").on("click", "#logoutButton", event => {
+                sessionStorage.removeItem("activeUser")
+                $("#eventForm").html("")
+                $("#eventList").html("")
+                $("#taskForm").html("")
+                $("#taskList").html("")
+                $("#articleForm").html("")
+                $("#articleList").html("")
+                $("#loginForm").html(LoginFormManager.renderLoginForm()).show()
+            })
         } else {
             LoginFormManager.clearForm()
             alert("You need to register")
