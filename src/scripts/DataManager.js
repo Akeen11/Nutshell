@@ -75,7 +75,7 @@ const APIManager = Object.create(null, {
             })
                 .then(r => r.json())
         },
-    },  
+    },
 
     deleteEvent: {
         value: (id) => {
@@ -108,11 +108,6 @@ const APIManager = Object.create(null, {
                 method: "DELETE"
             })
                 .then(r => r.json())
-<<<<<<< HEAD
-        }
-    },
-})
-=======
         }
     },
     completedTasks: {
@@ -129,18 +124,18 @@ const APIManager = Object.create(null, {
     },
 
 
-editedTasks: {
-    value: (id,task) => {
-        return fetch(`http://localhost:8088/tasks/${id}`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(task)
-        })
-            .then(response => response.json())
+    editedTasks: {
+        value: (id, task) => {
+            return fetch(`http://localhost:8088/tasks/${id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(task)
+            })
+                .then(response => response.json())
+        }
     }
-}
 
 })
 
@@ -162,7 +157,6 @@ editedTasks: {
 
 
 
->>>>>>> ad6a4e0c6bf641d66087b411f979cb331d424707
 
 
 module.exports = APIManager

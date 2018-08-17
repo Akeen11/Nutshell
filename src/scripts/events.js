@@ -1,19 +1,20 @@
 const createEvent = (name, location, date, id, userName) => {
     return `
-    <fieldset id="eventField--${id}">
+    <fieldset>
         <section>
             ${userName}
         </section>
-        <seciton>
-            <h4>${name}</h4>
-        </seciton>
+        <section>
+            <h4 id="eventField--${id}">${name}</h4>
+        </section>
         <section>
             ${location}
         </section>
         <section>
             <time>${date}</time>
         </section>
-        <button id="deleteEventButton--${id}" class="event__delete">Delete Event</button>   <button id="editEventButton" class"event__edit">Edit Event</button>
+        <button id="deleteEventButton--${id}" class="event__delete">Delete Event</button>
+        <button id="editEventButton--${id}" class="event__edit">Edit Event</button>
     </fieldset>
     `
 }
