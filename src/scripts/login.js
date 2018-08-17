@@ -1,4 +1,3 @@
-const DataManager = require("./DataManager")
 const $ = require("jquery")
 // module for the login form. Using jquery!
 
@@ -17,31 +16,29 @@ const LoginFormManager = Object.create(null, {
             return `
                     <h2>Sign In</h2>
                     <article class="userField">
-                    <label for="username">Username:</label>
+                    <label id="username">Username:</label>
                     <input required type="text" id="usernameTitle" placeholder="username">
+                    <p></p>
                     </article>
                     <article class="emailField">
                     <label for="email">Email Address:</label>
                     <input required type="text" id="email" placeholder="email address">
                     </article>
-
                     <button id="LoginButton" class="LoginButton">Login</button>
                     <h2>Create Account</h2>
                     <article class="nameField">
-                    <label for="createName">Username:</label>
+                    <label id="createName">Username:</label>
                     <input required type="text" id="nameTitle" placeholder="username">
+                    <p></p>
                     </article>
                     <article class="userField">
                     <label for="createUser">Email Address:</label>
                     <input required type="text" id="emailTitle" placeholder="email address">
                     </article>
-
-                <button id="create">Create Account</button>
+                    <button id="create">Create Account</button>
                 `
         }
     },
-
-
 
 })
 
