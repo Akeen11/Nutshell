@@ -1,6 +1,6 @@
 const createEvent = (userId, name, location, date, id, userName) => {
     return `
-    <fieldset>
+    <article>
         <section>
             ${userName}
         </section>
@@ -14,7 +14,7 @@ const createEvent = (userId, name, location, date, id, userName) => {
             <time>${date}</time>
         </section>
         <button id="deleteEventButton--${id}" class="event__delete">Delete Event</button>
-    </fieldset>
+    </article>
     `
 }
 

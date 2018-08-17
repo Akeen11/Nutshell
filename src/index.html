@@ -1,29 +1,37 @@
 <!doctype html>
-	<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>Nashville Software School</title>
+<html lang="en">
 
-		<link rel="stylesheet" href="./styles/styles.css">
-	</head>
+<head>
+	<meta charset="utf-8">
+	<title>Nashville Software School</title>
+
+	<link rel="stylesheet" href="./styles/styles.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+
+</head>
 
 <body>
 	<header>
-		<h1>Nutshell</h1>
+		<div class="header-container">
+			<h1 class= "header-item-h1" style="margin: 0;">Nutshell</h1>
+			<button id="logoutButton" class= "header-item-button" style="background-color: red; color: white; position: absolute; right: 0px; margin: 12px">Logout</button>
+		</div>
 		<img src="blueNutshell3.png" id="logo">
 	</header>
 
 	<div class="div--container" class="nutshell"></div>
-	<article>
+	<article class="loginArticle">
 		<div id="loginForm"></div>
+	</article>
+	<section class="page">
 		<div id="eventForm"></div>
 		<div id="eventList"></div>
 		<div id="taskForm"></div>
 		<div id="taskList"></div>
-	</article>
+	</section>
 
-		<div id="articleForm"></div>
-		<div id="articleEntry"></div>
+	<div id="articleForm"></div>
+	<div id="articleEntry"></div>
 	<script src="./bundle.js"></script>
 </body>
 
