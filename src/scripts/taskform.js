@@ -13,23 +13,19 @@ const taskFormManager = Object.create(null, {
         value: () => {
             return `
             <h2>Tasks</h2>
-            <div class="border">
-                <section>
-                    <label for="taskName">Task:</label>
-                    <input required type="text" id="taskName"
+            <div class="border bold-dark">
+                <section id="taskFieldset">
+                    <label id="thistaskName" for="taskName">To Do:</label>
+                    <input required type="text" id="taskName">
                     <p></p>
-                </section>
-                <section>
-                    <label for="taskDescription">Details:</label>
+                    <label id="thisTaskDescription" for="taskDescription"> Details:</label>
                     <textarea id="taskDescription"></textarea>
                     <p></p>
-                </section>
-                <section>
-                <label for="#taskCompletionDate">Completion Date:</label>
-                <input required type="date" id="taskCompletionDate">
-                <p></p>
-                </section>
+                    <label id="thistaskCompletionDate" for="#taskCompletionDate">Completion Date:</label>
+                    <p></p>
+                    <input required type="date" id="taskCompletionDate">
                 <button id="savetasktButton">Save Task</button>
+                </section>
             </div>
             `
         }

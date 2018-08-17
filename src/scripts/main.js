@@ -36,10 +36,11 @@ $("#loginForm").on("click", "#LoginButton", event => {
             $("#loginForm").hide() //hides login form after user login
 
             $("#eventForm").html(EventFormManager.renderEventForm()).show()
-              listEvents()
+            listEvents()
             //writes eventform to DOM after login form is hidden
             $("#taskForm").html(taskFormManager.renderTaskForm()).show() //writes eventlist to DOM
             listTasks()
+
         } else {
             LoginFormManager.clearForm()
             alert("You need to register")
@@ -141,7 +142,7 @@ $("#taskForm").on("click", "#savetasktButton", task => {
         name: $("#taskName").val(),
         description: $("#taskDescription").val(),
         date: $("#taskCompletionDate").val(),
-        completed:false
+        completed: false
     }
 
     DataManager.saveTask(newTask).then(() => {
@@ -167,7 +168,7 @@ $("#taskList").on("click", evt => { //bubbles click event to task list ID
     if (evt.target.classList.contains("task__completed")) { //places click event on delete task button
         const id = parseInt(evt.target.id.split("--")[1])
         let editedTask = {
-            completed:true
+            completed: true
         }
         DataManager.completedTasks(id, editedTask) //calls delete function
             .then(() => {
@@ -176,4 +177,31 @@ $("#taskList").on("click", evt => { //bubbles click event to task list ID
 
             })
     }
+})
+let editMode = false
+$("#taskList").on("click", evt => { //bubbles click event to task list ID
+    if (evt.target.classList.contains("editTask") && editMode === false) { //places click event on edit task button
+        const id = parseInt(evt.target.id.split("--")[1])
+
+        const element = document.getElementById(`taskNameField--${id}`)
+        const taskName = element.innerHTML
+        console.log(taskName);
+        element.innerHTML = `<input id="newestTask" type="text" value="${taskName}">`
+
+        editMode = true
+
+    } else if (evt.target.classList.contains("editTask") && editMode === true) {
+        let editedTaskName = {
+            name: document.getElementById("newestTask").value
+        }
+        const id = parseInt(evt.target.id.split("--")[1])
+        DataManager.editedTasks(id, editedTaskName) //calls delete function
+            .then(() => {
+                $("#taskList").empty()
+                editMode = false
+                listTasks()
+
+            })
+    }
+
 })
