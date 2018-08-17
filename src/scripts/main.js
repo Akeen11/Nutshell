@@ -31,23 +31,11 @@ $("#loginForm").on("click", "#LoginButton", event => {
 
             $("#loginForm").hide() //hides login form after user login
 
-            $("#eventForm").html(EventFormManager.renderEventForm()).show() //writes eventform to DOM after login form is hidden
-
-            listEvents() //writes eventlist to DOM
-            listArticles()
+            $("#eventForm").html(EventFormManager.renderEventForm()).show()
+              listEvents()
+            //writes eventform to DOM after login form is hidden
+            $("#taskForm").html(taskFormManager.renderTaskForm()).show() //writes eventlist to DOM
             listTasks()
-
-            $("#eventForm").on("click", "#logoutButton", event => {
-                sessionStorage.removeItem("activeUser")
-                $("#taskForm").html("")
-                $("#taskList").html("")
-                $("#articleForm").html("")
-                $("#articleEntry").html("")
-                $("#eventForm").html("")
-                $("#eventList").html("")
-                $("#loginForm").html(LoginFormManager.renderLoginForm()).show()
-            })
-
         } else {
             LoginFormManager.clearForm()
             alert("You need to register")
@@ -149,6 +137,7 @@ $("#taskForm").on("click", "#savetasktButton", task => {
         name: $("#taskName").val(),
         description: $("#taskDescription").val(),
         date: $("#taskCompletionDate").val(),
+        completed:false
     }
 
     DataManager.saveTask(newTask).then(() => {
@@ -166,8 +155,21 @@ $("#taskList").on("click", evt => { //bubbles click event to task list ID
                 $("#taskList").empty()
                 listTasks()
 
-
             })
     }
 })
 
+$("#taskList").on("click", evt => { //bubbles click event to task list ID
+    if (evt.target.classList.contains("task__completed")) { //places click event on delete task button
+        const id = parseInt(evt.target.id.split("--")[1])
+        let editedTask = {
+            completed:true
+        }
+        DataManager.completedTasks(id, editedTask) //calls delete function
+            .then(() => {
+                $("#taskList").empty()
+                listTasks()
+
+            })
+    }
+})
