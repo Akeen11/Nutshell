@@ -106,7 +106,7 @@ $("#messageList").on("click", evt => { //bubbles click event to event list ID
             //     $("#messageList").empty() //clears div before rerendering event list
             // })
             .then(() => {
-                listMessage() //rerenders event list
+                listMessage() //rerenders message list
             }
             )
     }

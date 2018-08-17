@@ -11,6 +11,7 @@ const createMessage =  (userId ,name, message, id)=>{
        <p>:${message}</p>
     </article>
     <button class="message__delete" id="deleteMessage--${id}">Delete Meassage</button>
+    <button class="message_edit" id="editMessage--${id}">Edit Message</button>
     </fieldset>
     </div>
     `
