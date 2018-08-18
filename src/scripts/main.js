@@ -288,7 +288,7 @@ $("#taskList").on("click", evt => { //bubbles click event to task list ID
                             })
                     }
                 })
-              let ediMode=fasle
+                let ediMode = fasle
                 $("#eventList").on("click", evt => {
                     if (evt.target.classList.contains("event__edit") && editMode === false) {
                         const id = parseInt(evt.target.id.split("--")[1])
