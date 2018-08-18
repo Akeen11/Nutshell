@@ -12,15 +12,12 @@ const listTasks = require("./tasklist")
 const $ = require("jquery")
 
 $("#loginForm").html(LoginFormManager.renderLoginForm()) //renders login form to DOM
-<<<<<<< HEAD
 
 // $("#loginForm").on("click", event => {
 //     if (event.target.classList.contains("LoginButton"))
 //         (console.log("IT WORKS"))
 // })
-=======
 $("#logoutButton").hide();
->>>>>>> 7a2b518b562b3ee659f19e46f7eceffd000624b3
 $("#loginForm").on("click", "#LoginButton", event => {
     DataManager.getAllUsers().then((users) => {
         const user = users.find(user => {
