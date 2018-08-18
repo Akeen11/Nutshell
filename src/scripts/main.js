@@ -317,4 +317,5 @@ $("#taskList").on("click", evt => { //bubbles click event to task list ID
 
                             })
                     }
+
                 })
