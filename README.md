@@ -1,4 +1,4 @@
-# Hello And Welcome To Nutshell!  
+# Hello And Welcome To Nutshell!  🥜
 
 With this app you may create tasks that you have to do, show links to articles and comment on them, submit events that are happening, and ...
 Let's get started!
@@ -8,7 +8,7 @@ To launch the app simply bring up the login page and create an account. Once you
 Here you will see your profile. From here you may create an event, create a task to do, create and link to an article, and ...
 
 ## Events
-To create an event, simply enter the title of what you would like to call the event, enter a location, specifiy the date, and save the event.
+To create an event, simply enter the title of what you would like to call the event, enter a location, specify the date, and save the event.
 You will see which account created the event, the title of it, and when and where it is. You may also choose to delete or edit the event.
 
 ## Tasks
