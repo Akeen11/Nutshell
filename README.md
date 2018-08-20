@@ -1,6 +1,4 @@
-# Hello And Welcome To Nutshell!   🥜
-
-![alt text](https://github.com/Rightenous-Ravens/Nutshell/blob/master/blueNutshell5.png)
+# Hello And Welcome To Nutshell! ![alt text](https://github.com/Rightenous-Ravens/Nutshell/blob/master/blueNutshell5.png)
 
 With this app you may create tasks that you have to do, show links to articles and comment on them, submit events that are happening, and ...
 Let's get started!
