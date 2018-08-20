@@ -127,13 +127,12 @@ $("#messageList").on("click", evt => { //bubbles message event to messaget list 
             // })
             .then(() => {
                 listMessage() //rerenders message list
-            }
-            )
+            })
     }
 })
 let editMode = false
 $("#messageList").on("click", evt => { //bubbles click event to event list ID
-    console.log(evt.target)
+    //console.log(evt.target)
     if (evt.target.classList.contains("message_edit") && editMode === false) {
         //places click event on edit message button
 
@@ -319,3 +318,6 @@ $("#taskList").on("click", evt => { //bubbles click event to task list ID
                     }
 
                 })
+            })
+    }
+})
