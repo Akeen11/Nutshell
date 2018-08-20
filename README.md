@@ -19,5 +19,5 @@ You may also edit and delete the tasks as well as mark it as complete.
 With the articles section you may enter a title, a date of when the article is being posted, and a link to the page.
 You may also comment on the article. You may also delete the article once it has been posted.
 
-## Logging out
+## Logging Out
 Whenever you would like to log out you may click on the logout button in the upper right-hand corner. This will take you back to the login page where you may log in again when you would like!
