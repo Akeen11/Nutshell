@@ -9,8 +9,8 @@ const createNewtask = (taskName, description, date, id) => {
         <h3> Description:
             ${description}
         </h3>
-            <button class="taskcompletebutton"> Completion date: ${date} <input type="checkbox" id="completedTasks--${id}" class="task__completed" value="completed">
-        completed task checkbox </button>
+            <button class="taskcompletebutton"> Due date: ${date} <input type="checkbox" id="completedTasks--${id}" class="task__completed" value="completed">
+             Completed </button>
         <button id="deleteTask--${id}" class="task__delete">Delete Task</button>
     </article>
     `

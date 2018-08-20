@@ -1,8 +1,13 @@
 .taskcompletebutton{
-    Padding: 14px;
-    color: green;
+    Padding: 10px;
+    color:#1d3b4a;
     font-size: medium;
     font-weight: bold;
+    border-color: #1d3b4a;
+
+}
+h2{
+    color:#1d3b4a;
 }
 #thistaskName {
     font-size: medium;
@@ -22,11 +27,31 @@
 #taskDescription{
     height: 2cm;
 }
-.tasklistBox{
-    background-color: lightgrey;
-}
 .task__delete{
     background-color: red;
+    color: white;
 }
-#taskFieldset{
-    background-color:#e8eaed; }
+#savetaskButton{
+    background-color: #1d3b4a;
+    color: white;
+    box-shadow: 5px darkgray;
+}
+.editTask{
+    background-color: #1d3b4a;
+    color: white;
+    box-shadow: 5px darkgray;
+}
+#saveEventButton{
+    background-color: #1d3b4a;
+    color: white;
+    box-shadow: 5px darkgray;
+}
+.event__delete{
+    background-color: red;
+    color: white;
+}
+#saveArticle{
+    background-color: #1d3b4a;
+    color: white;
+    box-shadow: 5px darkgray;
+}
