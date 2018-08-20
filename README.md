@@ -1,4 +1,6 @@
 # Hello And Welcome To Nutshell!   🥜
+![Nutshell Logo](/dist/blueNutshell3.png)
+Format: ![Alt Text](url)
 
 With this app you may create tasks that you have to do, show links to articles and comment on them, submit events that are happening, and ...
 Let's get started!
