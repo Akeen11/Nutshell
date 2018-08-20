@@ -25,6 +25,15 @@ const LoginFormManager = Object.create(null, {
                     <input required type="text" id="email" placeholder="email address">
                     </article>
                     <button id="LoginButton" class="LoginButton">Login</button>
+                    <script>
+var input = document.getElementById("email");
+input.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        document.getElementById("LoginButton").click();
+    }
+});
+</script>
                     <h2>Create Account</h2>
                     <article class="nameField">
                     <label id="createName">Username:</label>

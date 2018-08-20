@@ -45,6 +45,48 @@ const APIManager = Object.create(null, {
                 .then(r => r.json())
         }
     },
+    getMessage: {
+        value: () => {
+            return fetch("http://localhost:8088/Message")
+                .then(res => res.json())
+        }
+    },
+
+    saveMessage: {
+        value: (message) => {
+            return fetch("http://localhost:8088/Message", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(message)
+            })
+                .then(res => res.json())
+        }
+    },
+    patchMessage: {
+        value: (id,message) => {
+            return fetch(`http://localhost:8088/Message/${id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(message)
+
+            })
+                .then(res => res.json())
+        }
+    },
+    deleteMessage: {
+        value: (id) => {
+            return fetch(`http://localhost:8088/Message/${id}`, {
+                method: "DELETE",
+
+            })
+                .then(res => res.json())
+        }
+    },
+
     getAllEvents: {
         value: () => {
             return fetch("http://localhost:8088/events?_order=desc&_sort=date").then(r => r.json())
@@ -94,7 +136,7 @@ const APIManager = Object.create(null, {
                 },
                 body: JSON.stringify(tasks)
             })
-                .then(response => response.json())
+            .then(response => response.json())
         }
     },
     getAllTasks: {
@@ -107,7 +149,7 @@ const APIManager = Object.create(null, {
             return fetch(`http://localhost:8088/tasks/${id}`, {
                 method: "DELETE"
             })
-                .then(r => r.json())
+            .then(r => r.json())
         }
     },
     completedTasks: {

@@ -1,15 +1,29 @@
+console.log("Welcome to Browserify")
+//const $=require("jquery")
 const DataManager = require("./DataManager")
+const userList = require("./Userlist")
 const LoginFormManager = require("./login")
 const ArticleForm = require("./ArticleForm")
 const listArticles = require("./ArticleList")
 const EventFormManager = require("./EventForm")
+const MessageFormManager = require("./BuildMessage")
+const messageComponent = require("./message")
+const listMessage = require("./MessageList")
+//const scrollBottom = require("./scrollBottom")
 const listEvents = require("./EventList")
 const taskFormManager = require("./taskform")
 const listTasks = require("./tasklist")
 const $ = require("jquery")
 
 $("#loginForm").html(LoginFormManager.renderLoginForm()) //renders login form to DOM
+
+// $("#loginForm").on("click", event => {
+//     if (event.target.classList.contains("LoginButton"))
+//         (console.log("IT WORKS"))
+// })
+
 $("#logoutButton").hide();
+
 $("#loginForm").on("click", "#LoginButton", event => {
     DataManager.getAllUsers().then((users) => {
         const user = users.find(user => {
@@ -22,24 +36,30 @@ $("#loginForm").on("click", "#LoginButton", event => {
             //WORKING
             $("#loginForm").hide()
             //WORKING
+            $("#messages").html(MessageFormManager.renderMessageForm()).show()
             $("#eventForm").html(EventFormManager.renderEventForm()).show()
             $("#taskForm").html(taskFormManager.renderTaskForm()).show()
             $("#articleForm").html(ArticleForm.renderArticleForm()).show()
+            // sessionStorage.setItem("activeUser", JSON.stringify(user)) //sets active user to session storage
+            // LoginFormManager.clearForm() //clears form after button click
             $("#logo").hide();
             $("#footer").css("position", "relative");
             $("header").css("position", "relative");
             $("#logoutButton").show();
 
-            sessionStorage.setItem("activeUser", JSON.stringify(user)) //sets active user to session storage
-            LoginFormManager.clearForm() //clears form after button click
+            // $("#loginForm").hide() //hides login form after user login
 
-            $("#loginForm").hide() //hides login form after user login
+            // $("#eventForm").html(EventFormManager.renderEventForm()).show() //writes eventform to DOM after login form is hidden
 
+            listEvents()
+            listArticles()
             $("#eventForm").html(EventFormManager.renderEventForm()).show()
             listEvents()
             //writes eventform to DOM after login form is hidden
             $("#taskForm").html(taskFormManager.renderTaskForm()).show() //writes eventlist to DOM
             listTasks()
+            listMessage()
+            //writes eventlist to DOM
 
             $(".header-container").on("click", "#logoutButton", event => {
                 sessionStorage.removeItem("activeUser")
@@ -48,6 +68,11 @@ $("#loginForm").on("click", "#LoginButton", event => {
                 $("#taskForm").html("")
                 $("#taskList").html("")
                 $("#articleForm").html("")
+                $("#articleEntry").html("")
+                $("#eventForm").html("")
+                $("#eventList").html("")
+                $("#messages").html("")
+                $("#messageList").html("")
                 $("#articleList").html("")
                 $("#loginForm").html(LoginFormManager.renderLoginForm()).show()
                 $("#footer").css("position", "absolute");
@@ -77,57 +102,64 @@ $("#create").on("click", event => {
         })
 })
 
-// !!! Start of Article Stuff !!!
 
-// Event listener for saving the article into the database
-$("#articleForm").on("click", "#saveArticle", event => {
-    const userIDName = JSON.parse(sessionStorage.getItem("activeUser"))
-    const newArticle = {
-        userName: userIDName.name,
-        title: $("#articleTitle").val(),
-        content: $("#articleContent").val(),
-        date: $("#articleDate").val(),
-        URL: $("#articleURL").val(),
+$("#messages").on("click", "#message-btn", event => {
+    let user = JSON.parse(sessionStorage.getItem("activeUser"))
+    const newMessage = {
+        message: $("#message-input").val(),
+        userId: user.id,
+        userName: user.name
     }
-
-    DataManager.saveArticleEntry(newArticle).then(() => {
-        ArticleForm.clearForm()
-
-        $("#articleEntry").html("")
-        listArticles()
+    //console.log(newMessage)
+    DataManager.saveMessage(newMessage).then(() => {
+        MessageFormManager.clearForm()
+        $("#messageList").html("") //clears page before rerendering list from DB
+        listMessage()
     })
-})
 
-// Handle delete button clicks
-$("#articleEntry").on("click", evt => {
-    if (evt.target.classList.contains("article__delete")) {
-        const id = parseInt(evt.target.id.split("--")[1])
-        DataManager.deleteArticle(id)
+})
+$("#messageList").on("click", evt => { //bubbles message event to messaget list ID
+    if (evt.target.classList.contains("message__delete")) { //places click message on delete event button
+        const id = parseInt(evt.target.id.split("--")[1]) //splits and specifies specific button id's
+        DataManager.deleteMessage(id) //calls delete function
+            // .then(() => {
+            //     $("#messageList").empty() //clears div before rerendering event list
+            // })
             .then(() => {
-                $("#articleEntry").empty()
-                listArticles()
+                listMessage() //rerenders message list
             })
     }
 })
+let editMode = false
+$("#messageList").on("click", evt => { //bubbles click event to event list ID
+    //console.log(evt.target)
+    if (evt.target.classList.contains("message_edit") && editMode === false) {
+        //places click event on edit message button
 
-// !!! End of Article Stuff !!!
+        const id = parseInt(evt.target.id.split("--")[1])
+        const element = document.getElementById(`messageField--${id}`)
 
-$("#eventForm").on("click", "#saveEventButton", event => { //puts click event on save event button
-    const userObject = JSON.parse(sessionStorage.getItem("activeUser"))
-    const newEvent = { //creates event to be pushed to DB
-        userId: userObject.id, //grabs id from active user in session storage
-        userName: userObject.name,
-        name: $("#eventTitle").val(),
-        location: $("#eventContent").val(),
-        date: $("#eventDate").val(),
+
+        const msgName = element.innerHTML
+        console.log(msgName)
+        element.innerHTML = `<input id="newestMessage" type="text" value="${msgName}">`
+
+        editMode = true
     }
+    else if (evt.target.classList.contains("message_edit") && editMode === true) {
+        let editedMsgName = {
+            message: document.getElementById("newestMessage").value
+        }
+        const id = parseInt(evt.target.id.split("--")[1])
+        DataManager.patchMessage(id, editedMsgName) //calls edit function
+            .then(() => {
+                $("#messageList").empty()
+                editMode = false
+                listMessage()
 
-    DataManager.saveEvent(newEvent).then(() => {
-        EventFormManager.clearForm()
 
-        $("eventList").html("") //clears page before rerendering list from DB
-        listEvents() //renders event list to DOM
-    })
+            })
+    }
 })
 
 $("#eventList").on("click", evt => { //bubbles click event to event list ID
@@ -154,23 +186,24 @@ $("#taskForm").on("click", "#savetasktButton", task => {
         completed: false
     }
 
-    DataManager.saveTask(newTask).then(() => {
-        taskFormManager.clearForm()
+    $("#eventForm").on("click", "#saveEventButton", event => {
+        // const newEvent = {
+        //     $("#eventForm").on("click", "#saveEventButton", event => {//puts click event on save event button
+        const newEvent = { //creates event to be pushed to DB
+            userId: parseInt(JSON.parse(sessionStorage.getItem("activeUser")).id), //grabs id from active user in session storage
+            name: $("#eventTitle").val(),
+            location: $("#eventContent").val(),
+            date: $("#eventDate").val(),
+        }
 
-        $("#taskList").html("") //clears page before rerendering list from DB
-        listTasks() //renders event list to DOM
+        DataManager.saveEvent(newEvent).then(() => {
+            EventFormManager.clearForm()
+
+            $("eventList").html("") //clears page before rerendering list from DB
+            listEvents() //renders event list to DOM
+        })
     })
-})
-$("#taskList").on("click", evt => { //bubbles click event to task list ID
-    if (evt.target.classList.contains("task__delete")) { //places click event on delete task button
-        const id = parseInt(evt.target.id.split("--")[1])
-        DataManager.deleteTask(id) //calls delete function
-            .then(() => {
-                $("#taskList").empty()
-                listTasks()
 
-            })
-    }
 })
 
 $("#taskList").on("click", evt => { //bubbles click event to task list ID
@@ -184,62 +217,107 @@ $("#taskList").on("click", evt => { //bubbles click event to task list ID
                 $("#taskList").empty()
                 listTasks()
 
-            })
-    }
-})
+                $("#eventList").on("click", evt => { //bubbles click event to event list ID
+                    if (evt.target.classList.contains("event__delete")) { //places click event on delete event button
+                        const id = parseInt(evt.target.id.split("--")[1]) //splits and specifies specific button id's
+                        DataManager.deleteEvent(id) //calls delete function
+                            .then(() => {
+                                $("eventList").empty() //clears div before rerendering event list
+                            })
+                            .then(() => {
+                                listEvents() //rerenders event list
+                            }
+                            )
+                    }
+                })
+                //parseINT keeps there from being issues later with numbers. session storage gets the item active user
 
-let editMode = false
-$("#taskList").on("click", evt => { 
-    if (evt.target.classList.contains("editTask") && editMode === false) { 
-        const id = parseInt(evt.target.id.split("--")[1])
+                //takes id taskForm--jquery The .on() method attaches event handlers-here "click" to the save task button//
+                $("#taskForm").on("click", "#savetasktButton", task => {
+                    const userObject = parseInt(JSON.parse(sessionStorage.getItem("activeUser"))) //grabs id from active user in session storage
+                    const newTask = {
+                        userId: userObject.id,
+                        userName: userObject.name,
+                        name: $("#taskName").val(),
+                        description: $("#taskDescription").val(),
+                        date: $("#taskCompletionDate").val(),
+                    }
 
-        const element = document.getElementById(`taskNameField--${id}`)
-        const taskName = element.innerHTML
-        element.innerHTML = `<input id="newestTask" type="text" value="${taskName}">`
+                    DataManager.saveTask(newTask).then(() => {
+                        taskFormManager.clearForm()
 
-        editMode = true
+                        $("#taskList").html("") //clears page before rerendering list from DB
+                        listTasks() //renders event list to DOM
+                    })
+                })
+                $("#taskList").on("click", evt => { //bubbles click event to task list ID
+                    if (evt.target.classList.contains("task__delete")) { //places click event on delete task button
+                        const id = parseInt(evt.target.id.split("--")[1])
+                        DataManager.deleteTask(id) //calls delete function
+                            .then(() => {
+                                $("#taskList").empty()
+                                listTasks()
 
-    } else if (evt.target.classList.contains("editTask") && editMode === true) {
-        let editedTaskName = {
-            name: document.getElementById("newestTask").value
-        }
-        const id = parseInt(evt.target.id.split("--")[1])
-        DataManager.editedTasks(id, editedTaskName) 
-            .then(() => {
-                $("#taskList").empty()
-                editMode = false
-                listTasks()
 
-            })
-    }
-})
+                            })
+                    }
+                })
+                let editMode = false
+                $("#taskList").on("click", evt => {
+                    if (evt.target.classList.contains("editTask") && editMode === false) {
+                        const id = parseInt(evt.target.id.split("--")[1])
 
-$("#eventList").on("click", evt => {
-    if (evt.target.classList.contains("event__edit") && editMode === false) {
-        const id = parseInt(evt.target.id.split("--")[1])
+                        const element = document.getElementById(`taskNameField--${id}`)
+                        const taskName = element.innerHTML
+                        element.innerHTML = `<input id="newestTask" type="text" value="${taskName}">`
 
-        const element = document.getElementById(`eventField--${id}`)
-        const name = element.innerHTML
-        element.innerHTML = `
+                        editMode = true
+
+                    } else if (evt.target.classList.contains("editTask") && editMode === true) {
+                        let editedTaskName = {
+                            name: document.getElementById("newestTask").value
+                        }
+                        const id = parseInt(evt.target.id.split("--")[1])
+                        DataManager.editedTasks(id, editedTaskName)
+                            .then(() => {
+                                $("#taskList").empty()
+                                editMode = false
+                                listTasks()
+
+                            })
+                    }
+                })
+                let ediMode = fasle
+                $("#eventList").on("click", evt => {
+                    if (evt.target.classList.contains("event__edit") && editMode === false) {
+                        const id = parseInt(evt.target.id.split("--")[1])
+
+                        const element = document.getElementById(`eventField--${id}`)
+                        const name = element.innerHTML
+                        element.innerHTML = `
         <input id="newestEventName" type="text" value="${name}">
         `
 
-        editMode = true
+                        editMode = true
 
-    } else if (evt.target.classList.contains("event__edit") && editMode === true) {
-        const userObject = JSON.parse(sessionStorage.getItem("activeUser"))
-        const updatedEvent = {
-            userId: userObject.id,
-            userName: userObject.name,
-            name: document.getElementById("newestEventName").value,
-        }
-        const id = parseInt(evt.target.id.split("--")[1])
-        DataManager.editEvent(id, updatedEvent) 
-            .then(() => {
-                $("#eventList").empty()
-                editMode = false
-                listEvents()
+                    } else if (evt.target.classList.contains("event__edit") && editMode === true) {
+                        const userObject = JSON.parse(sessionStorage.getItem("activeUser"))
+                        const updatedEvent = {
+                            userId: userObject.id,
+                            userName: userObject.name,
+                            name: document.getElementById("newestEventName").value,
+                        }
+                        const id = parseInt(evt.target.id.split("--")[1])
+                        DataManager.editEvent(id, updatedEvent)
+                            .then(() => {
+                                $("#eventList").empty()
+                                editMode = false
+                                listEvents()
 
+                            })
+                    }
+
+                })
             })
     }
 })
