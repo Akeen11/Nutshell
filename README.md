@@ -1,4 +1,4 @@
-# Hello And Welcome To Nutshell!  🥜
+# Hello And Welcome To Nutshell!   🥜
 
 With this app you may create tasks that you have to do, show links to articles and comment on them, submit events that are happening, and ...
 Let's get started!
